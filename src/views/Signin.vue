@@ -1,0 +1,120 @@
+<template>
+    <v-container>
+        <v-layout row v-if="error">
+            <v-flex xs12 sm6 offset-sm3>
+                <app-alert @dismissed="onDismissed" :text="error.message" :code="error"> 
+                </app-alert> 
+            </v-flex>
+        </v-layout>
+        <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+                <v-flex xs12 class="text-xs-center">
+                    <v-layout row wrap align-center>
+                        <v-flex xs12 sm6>
+                            <v-img
+                             :src="require('../assets/teach.png')"
+                             class="my-3"
+                             contain
+                             height="350"
+                             ></v-img>
+                        </v-flex>
+                        <v-flex xs12 sm6>
+                            <p style="color: #455A64; font-size: 120%">Finn mentorer for hjelp med å lære noe nytt, løse oppgaver, prøve ut nye ting. Alt fra Eksamener, Obliger, Oppgaver til Idrett og masse annet, ikke vent start nå !</p>
+                        </v-flex>
+                    </v-layout>
+                    <v-btn class="primary white--text text-xs-center" 
+                           flat
+                           style="
+                           width: 90%;
+                           margin: 20px 0;"
+                           type="info" 
+                           @click="onSignin"
+                           :disabled="loading" 
+                           :loading="loading">Log inn med facebook
+                           <span slot="loader" class="custom-loader">
+                               <v-icon light>cached</v-icon>
+                           </span>
+                    </v-btn>
+                </v-flex>
+            </v-flex>
+        </v-layout>
+    </v-container>
+</template>
+
+<script>
+export default {
+    data () {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+    computed: {
+        user(){
+            return this.$store.getters.user
+        },
+        error(){
+            return this.$store.getters.error
+        },
+        loading(){
+            return this.$store.getters.loading
+        }
+    },
+    watch: {
+        user(value) {
+            if (value !== null && value !== undefined) {
+                this.$router.push('/dashboard')
+            } 
+        }
+    },
+    methods: {
+        onSignin(){
+            this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
+        },
+        onDismissed(){
+            this.$store.dispatch('clearError')
+        }
+    }
+} 
+</script>
+
+
+<style>
+.custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+}
+@-moz-keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@-o-keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+</style>
+
