@@ -1,5 +1,9 @@
 <template>
-    <div>
-        <h3>Meeento bruuuv</h3>
-    </div>
+    <v-container>
+        <v-layout>
+            <v-flex xs12 sm6 offset-sm3>
+                Meeento brrrruv
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>

@@ -8,25 +8,36 @@ export default new Vuex.Store({
     state: {
         user: null,
         loading: false,
-        error: null
+        error: null,
+        req: []
     },
     mutations: {
         setUser (state, payload) {
             state.user = payload
         },
-        updateUser({commit}, payload){
+        setReq (state, payload){
+            state.req.push(payload)
+        },
+        updateUser(state, payload){
+            let user = state.user
 
-            if (payload.imageURL){
-                user.imageURL = payload.imageURL
+            if (payload.study){
+                user.study = payload.study
             }
             if (payload.bio){
                 user.bio = payload.bio
             }
+            if (payload.imageURL){
+                user.imageURL = payload.imageURL
+            }
             if (payload.subList){
                 user.subList = payload.subList
             }
-            if (payload.study){
-                user.study = payload.study
+            if (payload.requests){
+                user.requests = payload.requests
+            }
+            if (payload.offers){
+                user.offers = payload.offers
             }
         },
         setLoading (state, payload) {
@@ -60,14 +71,16 @@ export default new Vuex.Store({
 
                     if (user === null){
                         const newUser = {
-                            name: name,
                             id: key,
+                            name: name,
+                            study: '',
                             bio: '',
-                            imageURL: false,
+                            imageURL: '',
+                            subList: false,
                             requests: [],
                             offers: []
                         }
-                        firebase.database().ref('users/' + key).push(newUser)
+                        firebase.database().ref('/users/').child(key).set(newUser)
                             .then(result => {
                                 commit('setLoading', false)
                                 commit('setUser', newUser)})
@@ -76,10 +89,8 @@ export default new Vuex.Store({
                                 commit('setError', error)
                                 console.log(error)})
                     } else {
-                        for (let key in user){
-                            commit('setLoading', false)
-                            commit('setUser', user[key])
-                        }
+                          commit('setLoading', false)
+                          commit('setUser', user)
                     }})
                 .catch(
                     error => {
@@ -94,10 +105,8 @@ export default new Vuex.Store({
             firebase.database().ref('/users/' + getters.user.id).once('value')
                 .then(data => {
                     const user = data.val()
-                    for (let key in user){
-                        commit('setLoading', false)
-                        commit('setUser', user[key])
-                    }
+                    commit('setLoading', false)
+                    commit('setUser', user)
                 })
                 .catch(error => {
                     console.log(error)
@@ -106,45 +115,94 @@ export default new Vuex.Store({
         },
         autoSignIn({ commit }, payload) {
             commit('setUser', {
-                name: payload.name,
                 id: payload.uid,
-                image: payload.image,
+                name: payload.name,
+                study: payload.study,
                 bio: payload.bio,
-                requests: [],
-                offers: []
+                imageURL: payload.imageURL,
+                subList: payload.subList,
+                requests: payload.requests,
+                offers: payload.offers
             })
         },
         updateImage({commit, getters}, payload){
-            let imageURL
             let key = payload.id
-            
+
+            commit('setLoading', true)
             const filename = payload.image.name
             const ext = filename.slice(filename.lastIndexOf('.'))
             firebase.storage().ref('users/' + key + '.' + ext).put(payload.image)
                 .then(
                     fileData => {
                         firebase.storage().ref(fileData.metadata.fullPath).getDownloadURL()
-                          .then((url) => {
-                              firebase.database().ref('/users/' + key).once('value')
-                                  .then(data => {
-                                      var user = data.val()
-                                      for (let userKey in user){
-                                        return firebase.database().ref('/users/' + key).child(userKey).update({imageURL: url})
-                                      }
-                          })
-                 })})
-                .then(
-                    () => {    
-                        commit('updateUser', {
-                            imageURL: imageURL,
-                            id: key
-                        })
+                            .then((url) => {
+                                firebase.database().ref('/users/' + key).once('value')
+                                    .then(data => {
+                                        var user = data.val()
+                                        for (let userKey in user){
+                                            firebase.database().ref('/users/' + key).child(userKey).update({imageURL: url}).then(data => {
+                                                commit('updateUser', {
+                                                    imageURL: url,
+                                                    id: key
+                                                })
+                                                commit('setLoading', false)
+                                            })
+                                        }
+                                    })
+                            })})
+                .catch(
+                    (error) => {
+                        console.log(error)
                     }
-            ).catch(
-                (error) => {
+                )        
+        },
+        updateUser({commit}, payload){
+            commit('setLoading', true)
+            const user = {}
+            firebase.database().ref('/users/' + payload.id).once('value').
+                then(data => {
+                    var user = data.val()
+                    for (let key in user){
+                        if (payload.study){
+                            user.study = payload.study
+                        }
+                        if (payload.bio){
+                            user.bio = payload.bio
+                        }
+                        if (payload.requests){
+                            user.requests = payload.requests
+                        }
+                        if (payload.offers){
+                            user.offers = payload.offers
+                        }
+                        user.subList = payload.subList
+                        firebase.database().ref('/users/' + payload.id).child(key).update(user)
+                            .then(() => {
+                                commit('updateUser', payload)
+                                commit('setLoading', false)
+                            })
+                    }
+                })
+                .catch(error => {
                     console.log(error)
-                }
-            )        
+                })
+        },
+        addReq({commit}, payload){
+            const req = payload
+            commit('setLoading', true)
+            firebase.database().ref('/requests/').push(req)
+                .then(data => {
+                    let key = data.key
+                    commit('setLoading', false)
+                    commit('setReq', {
+                        ...req,
+                        id: key
+                    })
+                })
+                .catch(error => {
+                    commit('setLoading', false)
+                    console.log(error)
+                })
         },
         logout({ commit }) {
             firebase.auth().signOut()
@@ -155,6 +213,9 @@ export default new Vuex.Store({
         }
     },
     getters: {
+        req(state) {
+            return state.req
+        },
         user(state) {
             return state.user
         },

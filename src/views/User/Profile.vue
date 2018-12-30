@@ -22,17 +22,17 @@
             <v-layout row wrap>
                 <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
                     <div slot="activator">
-                        <v-avatar size="150px" v-if="user.imageURL === false && imageURL === null" class="mb-3">
+                        <v-avatar size="150px" v-if="!user.imageURL && imageURL === null" class="mb-3">
                             <img :src="require('../../assets/profile.svg')">
                         </v-avatar>
                         <v-avatar size="150px" v-if="imageURL !== null" class="mb-3">
                             <img :src="imageURL">
                         </v-avatar>
-                        <v-avatar size="150px" v-if="imageURL === null && user.imageURL !== false" class="mb-3">
+                        <v-avatar size="150px" v-if="imageURL === null && user.imageURL" class="mb-3">
                             <img :src="user.imageURL">
                         </v-avatar>
                     </div>
-                    <v-btn v-if="usersProfile" @click="onPickFile" class="mb-3">Edit image</v-btn>
+                    <v-btn v-if="usersProfile" @click="onPickFile" class="mb-3">Endre Bildet</v-btn>
                     <v-btn v-if="usersProfile && imageURL !== null" @click="onSaveImage" class="success mb-3">Lagre</v-btn>
                     <input type="file" style="display: None" ref="fileInput" accept="image/*" @change="onFilePicked"></input>
                 </v-flex>
@@ -44,8 +44,8 @@
                         label="Navn"
                         id="name"
                         v-model="name"
-                        :disabled="true"
-                        outline
+                        readonly
+                        box
                         >
                     </v-text-field>
                 </v-flex>
@@ -54,11 +54,11 @@
                 <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
                     <v-text-field
                         name="study"
-                        label="Studere"
+                        label="Studie"
                         id="study"
                         v-model="study"
                         :disabled="!usersProfile"
-                        outline
+                        box
                         >
                     </v-text-field>
                 </v-flex>
@@ -67,18 +67,18 @@
                 <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
                     <v-textarea
                         name="bio"
-                        label="BIO"
+                        label="Litt om meg"
                         id="bio"
                         v-model="bio"
                         :disabled="!usersProfile"
-                        outline
+                        box
                         >
                     </v-textarea>
                 </v-flex>
             </v-layout>
             <v-layout row wrap>
                 <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
-                    <v-card flat  dark>
+                    <v-card flat dark>
                         <v-card-title><h4>Fag jeg underviser og ønsket pris i timen</h4></v-card-title>
                         <v-divider></v-divider>
                         <v-list>
@@ -88,6 +88,11 @@
                             </v-list-tile>
                         </v-list>
                         <v-divider></v-divider>
+                            <!-- <v-layout row> -->
+                            <!--     <v-flex xs12 class="text-xs-left mt-3 mb-2 ml-3"> -->
+                            <!--         <h4>Legg til fag</h4> -->
+                            <!--     </v-flex> -->
+                            <!-- </v-layout> -->
                         <v-card-actions>
                             <v-layout row align-center>
                                 <v-flex xs5 class="mr-2">
@@ -134,10 +139,7 @@ export default {
         return {
             imageURL: null,
             image: null,
-            subList: [
-                {sub: 'ARA1010', price: '200kr'},
-                {sub: 'INF1010', price: '300kr'}
-            ],
+            subList: null,
             name: '',
             bio: '',
             study: '',
@@ -163,6 +165,9 @@ export default {
         addSub(){
             if(this.sub === '' || this.price === ''){
                 return
+            }
+            if (this.subList === false){
+                this.subList = []
             }
             this.subList.push({
                 sub: this.sub,
@@ -196,24 +201,22 @@ export default {
                 id: this.user.id,
                 image: this.image
             })
+            this.imageURL = null
         },
         onSaveChanges(){
-            if (this.bio() === ''){
-                return
-            }
             this.$store.dispatch('updateUser', {
                 id: this.user.id,
                 study: this.study,
                 bio: this.bio,
                 subList: this.subList,
-                image: this.image
             })
         }
     },
     created() {
         this.name = this.user.name
+        this.study = this.user.study
         this.bio = this.user.bio
-        this.image = this.user.image
+        this.subList = this.user.subList
     }
 } 
 </script>

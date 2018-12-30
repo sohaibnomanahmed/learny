@@ -24,6 +24,7 @@
                     </v-layout>
                     <v-btn class="primary white--text text-xs-center" 
                            flat
+                           large
                            style="
                            width: 90%;
                            margin: 20px 0;"

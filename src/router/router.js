@@ -39,6 +39,12 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
+      path: '/requests/add',
+      name: 'createrequest',
+      component: () => import('../views/User/CreateRequest'),
+      beforeEnter: AuthGuard
+    },
+    {
       path: '/about',
       name: 'about',
       component: () => import('../views/About.vue')

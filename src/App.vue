@@ -63,10 +63,10 @@ export default {
             let menuItems = []
             if (this.userIsAuth) {
                 menuItems = [
-                    { icon: 'dashboard', title: 'Dashbord', link: '/dashboard' },
                     { icon: 'assignment', title: 'Bestillinger', link: '/requests' },
                     { icon: 'school', title: 'Finn Mentor', link: '/mentors' },
                     { icon: 'person', title: 'Profil', link: '/profile/' + this.$store.getters.user.id },
+                    { icon: 'message', title: 'Chat', link: '/dashboard' },
                 ]
             }
             return menuItems
