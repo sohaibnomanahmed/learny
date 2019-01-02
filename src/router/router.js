@@ -14,9 +14,16 @@ export default new Router({
       component: () => import('../views/Signin')
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => import('../views/User/Dashboard'),
+      path: '/chat/:id',
+      name: 'chat',
+      props: true,
+      component: () => import('../views/User/Chat/Chat'),
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/chatlist/',
+      name: 'chatlist',
+      component: () => import('../views/User/Chat/ChatList'),
       beforeEnter: AuthGuard
     },
     {
@@ -37,17 +44,6 @@ export default new Router({
       name: 'requests',
       component: () => import('../views/User/Requests'),
       beforeEnter: AuthGuard
-    },
-    {
-      path: '/requests/add',
-      name: 'createrequest',
-      component: () => import('../views/User/CreateRequest'),
-      beforeEnter: AuthGuard
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/About.vue')
     }
   ]
 })

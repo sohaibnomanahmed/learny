@@ -18,22 +18,25 @@
                 <v-flex xs12 sm8 offset-sm2 class="text-xs-left">
                     <v-card>
                         <v-container>
-                            <v-text-field
-                                label="Søk etter navn"
-                                v-model="search"
-                                box
-                                >
-                            </v-text-field>
-                            <v-layout row wrap v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2" >
+                        <v-layout row wrap v-for="(chat, i) in chatlist" :key="i" class="mb-2" >
+                            <v-btn flat :to="'/chat/' + chat">
                             <v-flex xs12>
-                                {{ getUser(Luser.id).name }}
                                 <v-avatar size="40px">
-                                    <img :src="getUser(Luser.id).imageURL">
+                                    <img :src="getUser(chat).imageURL">
                                 </v-avatar>
                             </v-flex>
+                            </v-btn>
                         </v-layout>
                         </v-container>
                     </v-card>
+                </v-flex>
+            </v-layout>
+            <v-layout row wrap>
+                <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
+                </v-flex>
+            </v-layout>
+            <v-layout row wrap>
+                <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
                 </v-flex>
             </v-layout>
         </v-container>
@@ -45,7 +48,7 @@ export default {
     props: ['id'],
     data () {
         return {
-            search: ''
+            chatlist: []
         }
     },
     computed: {
@@ -55,24 +58,8 @@ export default {
         getUser (){
             return this.$store.getters.getUser
         },
-        users(){
-//            ^    # assert position at start of line
-//            (    # Start group 1
-//            .+   # match any character (except line terminators), one or more times
-//            )    # End group 1
-//            \/   # match `/` literally
-//            .*   # match any character (except line terminators), zero or more times
-//            $    # assert position at end of line
-            
-            let allUsers = this.$store.getters.users
-            let searchedUsers = []
-            for (let index in allUsers){
-                const regex = new RegExp(this.search, "gi");
-                if (regex.test(allUsers[index].name)){
-                    searchedUsers.push(allUsers[index])
-                }
-            }
-            return searchedUsers
+        messages(){
+            return  this.$store.getters.messages
         },
         error(){
             return this.$store.getters.error

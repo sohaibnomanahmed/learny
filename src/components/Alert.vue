@@ -2,7 +2,7 @@
     <v-alert
         @input="onClose"
         dismissible
-        :type="code"
+        :type="error"
         :value="true"
         >
         {{ text }}
@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        props: ['text', 'code'],
+        props: ['text'],
         methods: {
             onClose() {
                 this.$emit('dismissed')

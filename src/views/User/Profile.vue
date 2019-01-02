@@ -22,13 +22,10 @@
             <v-layout row wrap>
                 <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
                     <div slot="activator">
-                        <v-avatar size="150px" v-if="!user.imageURL && imageURL === null" class="mb-3">
-                            <img :src="require('../../assets/profile.svg')">
-                        </v-avatar>
                         <v-avatar size="150px" v-if="imageURL !== null" class="mb-3">
                             <img :src="imageURL">
                         </v-avatar>
-                        <v-avatar size="150px" v-if="imageURL === null && user.imageURL" class="mb-3">
+                        <v-avatar size="150px" v-if="imageURL === null" class="mb-3">
                             <img :src="user.imageURL">
                         </v-avatar>
                     </div>

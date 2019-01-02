@@ -1,8 +1,22 @@
 <template>
-    <v-container>
+    <div>
+    <v-container v-if="loading">
+        <v-layout row>
+            <v-flex xs12 class="text-xs-center" >
+                <v-progress-circular
+                         indeterminate
+                         color="primary"
+                         :width="7"
+                         :size="70"
+                         v-if="loading"
+                         ></v-progress-circular>
+            </v-flex>
+        </v-layout>
+    </v-container>
+    <v-container v-else>
         <v-layout row v-if="error">
             <v-flex xs12 sm6 offset-sm3>
-                <app-alert @dismissed="onDismissed" :text="error.message" :code="error"> 
+                <app-alert @dismissed="onDismissed" :text="error.message" > 
                 </app-alert> 
             </v-flex>
         </v-layout>
@@ -27,7 +41,7 @@
                            large
                            style="
                            width: 90%;
-                           margin: 20px 0;"
+                           margin: 5px 0;"
                            type="info" 
                            @click="onSignin"
                            :disabled="loading" 
@@ -36,18 +50,31 @@
                                <v-icon light>cached</v-icon>
                            </span>
                     </v-btn>
+                    <v-btn class="red white--text text-xs-center" 
+                           flat
+                           large
+                           style="
+                           width: 90%;
+                           margin: 5px 0;"
+                           type="info" 
+                           @click="onSigninGoogle"
+                           :disabled="loading" 
+                           :loading="loading">Log inn med Google
+                           <span slot="loader" class="custom-loader">
+                               <v-icon light>cached</v-icon>
+                           </span>
+                    </v-btn>
                 </v-flex>
             </v-flex>
         </v-layout>
     </v-container>
+    </div>
 </template>
 
 <script>
 export default {
     data () {
         return {
-            email: '',
-            password: ''
         }
     },
     computed: {
@@ -64,13 +91,16 @@ export default {
     watch: {
         user(value) {
             if (value !== null && value !== undefined) {
-                this.$router.push('/dashboard')
+                this.$router.push('/requests')
             } 
         }
     },
     methods: {
         onSignin(){
-            this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
+            this.$store.dispatch('signUserIn')
+        },
+        onSigninGoogle(){
+            this.$store.dispatch('signUserInGoogle')
         },
         onDismissed(){
             this.$store.dispatch('clearError')

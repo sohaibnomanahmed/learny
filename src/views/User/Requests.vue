@@ -51,8 +51,37 @@
                 </v-layout>
                 <v-layout row wrap class="text-xs-left" align-center>
                     <v-flex xs12>
-                        <v-card flat style="border: 1px solid #ccc">
-                            Bestillinger
+                        <v-card flat v-for="(req, i) in requests" :key="`${i}-${req.id}`" style="border: 1px solid #ccc" class="mb-2">
+                            <v-layout row>
+                             <v-flex xs5 sm4 class="text-xs-center">
+                                <v-avatar style="width: 100%; height: auto; margin: 20px;" size="70px">
+                                    <img 
+                                    :src="getUser(req.creator_id).imageURL"
+                                    >
+                                </v-avatar>
+                             </v-flex>
+
+                             <v-flex xs7 sm8>
+                                <v-card-title primary-title>
+                                    <h3>{{ getUser(req.creator_id).name }}</h3>
+                                </v-card-title>
+
+                                <v-card-text>
+                                    <div>{{ req.request }}</div>
+                                    <div>pris: {{ req.price }}</div>
+                                    <div>Sted: {{ req.place }}</div>
+                                </v-card-text>
+
+                                <v-card-actions> <!-- v-if="getUser(req.creator_id).id !== user.id">-->
+                                    <v-btn flat
+                                        :to="'/chat/' + getUser(req.creator_id).id"
+                                        >
+                                        <v-icon left light>arrow_forward</v-icon>
+                                        Send melding
+                                    </v-btn>
+                                </v-card-actions>
+                             </v-flex>
+                         </v-layout>
                         </v-card>
                     </v-flex>
                 </v-layout>
@@ -76,6 +105,12 @@
      },
      loading (){
        return this.$store.getters.loading
+     },
+     getUser (){
+       return this.$store.getters.getUser
+     },
+     requests (){
+        return this.$store.getters.req
      }
    },
    methods: {
@@ -86,7 +121,7 @@
                 price: this.price,
                 place: this.place,
             })
-        }
+        },
    }
  }
 </script>
