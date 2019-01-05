@@ -16,20 +16,28 @@
         <v-container v-else>
             <v-layout row wrap>
                 <v-flex xs12 sm8 offset-sm2 class="text-xs-left">
-                    <v-card>
-                        <v-container>
                             <v-text-field
-                                label="Søk etter navn"
+                                label="Søk etter navn eller studie"
                                 v-model="search"
-                                box
+                                prepend-icon="search"
+                                solo
+                                hide-details
+                                flat
+                                style="border: 1px solid #ccc"
+                                class="mb-3 pl-2"
                                 >
                             </v-text-field>
-                            <v-layout row wrap v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2" >
-                            <v-flex xs12>
-                                {{ getUser(Luser.id).name }}
+                    <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2"  >
+                        <v-container>
+                            <v-layout row wrap >
+                                <v-flex xs3 sm1>
                                 <v-avatar size="40px">
                                     <img :src="getUser(Luser.id).imageURL">
                                 </v-avatar>
+                                </v-flex>
+                            <v-flex xs9 sm11>
+                                <div><h4>{{ getUser(Luser.id).name }}</h4></div>
+                                <div>Studie: {{ getUser(Luser.id).study }}</div>
                             </v-flex>
                         </v-layout>
                         </v-container>
@@ -68,7 +76,7 @@ export default {
             let searchedUsers = []
             for (let index in allUsers){
                 const regex = new RegExp(this.search, "gi");
-                if (regex.test(allUsers[index].name)){
+                if (regex.test(allUsers[index].study) || regex.test(allUsers[index].name)){
                     searchedUsers.push(allUsers[index])
                 }
             }

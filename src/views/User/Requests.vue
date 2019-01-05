@@ -9,7 +9,9 @@
                         <v-textarea
                             label="Hva trenger du hjelp med?"
                             v-model="request"
-                            box
+                            solo
+                            flat
+                            style="border: 1px solid #ccc"
                             hide-details
                             required>
                         </v-textarea>
@@ -21,7 +23,11 @@
                                 <v-text-field
                                     label="Pris"
                                     v-model="price"
-                                    box
+                            solo
+                            flat
+                            style="border-right: 1px solid #ccc;
+                                    border-bottom: 1px solid #ccc;
+                                    border-left: 1px solid #ccc"
                                     hide-details
                                     required>
                                 </v-text-field>
@@ -31,7 +37,10 @@
                                 <v-text-field
                                     label="Sted/Tid"
                                     v-model="place"
-                                    box
+                            solo
+                            flat
+                            style="border-right: 1px solid #ccc;
+                                    border-bottom: 1px solid #ccc"
                                     hide-details
                                     required>
                                 </v-text-field>
@@ -53,7 +62,7 @@
                     <v-flex xs12>
                         <v-card flat v-for="(req, i) in requests" :key="`${i}-${req.id}`" style="border: 1px solid #ccc" class="mb-2">
                             <v-layout row>
-                             <v-flex xs5 sm4 class="text-xs-center">
+                             <v-flex xs4 sm3 class="text-xs-center" @click="toMem(req.creator_id)" style="cursor: pointer">
                                 <v-avatar style="width: 100%; height: auto; margin: 20px;" size="70px">
                                     <img 
                                     :src="getUser(req.creator_id).imageURL"
@@ -62,11 +71,11 @@
                              </v-flex>
 
                              <v-flex xs7 sm8>
-                                <v-card-title primary-title>
+                                <v-card-title primary @click="toMem(req.creator_id)" style="cursor: pointer" >
                                     <h3>{{ getUser(req.creator_id).name }}</h3>
                                 </v-card-title>
 
-                                <v-card-text>
+                                <v-card-text class="py-0">
                                     <div>{{ req.request }}</div>
                                     <div>pris: {{ req.price }}</div>
                                     <div>Sted: {{ req.place }}</div>
@@ -75,8 +84,11 @@
                                 <v-card-actions> <!-- v-if="getUser(req.creator_id).id !== user.id">-->
                                     <v-btn flat
                                         :to="'/chat/' + getUser(req.creator_id).id"
+                                                      block
+                                                      outline
+                                                      class="primary primary--text"
                                         >
-                                        <v-icon left light>arrow_forward</v-icon>
+                                        <!-- <v-icon left light>arrow_forward</v-icon> -->
                                         Send melding
                                     </v-btn>
                                 </v-card-actions>
@@ -122,6 +134,9 @@
                 place: this.place,
             })
         },
+       toMem(id){
+        this.$router.push('/profile/' + id)
+       }
    }
  }
 </script>

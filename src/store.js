@@ -26,6 +26,9 @@ export default new Vuex.Store({
         setReq (state, payload){
             state.req = payload
         },
+        removeSub (state, payload){
+            state.user.subList.splice(payload, 1)
+        },
         setMessages(state, payload){
             state.messages = payload
         },
@@ -165,11 +168,11 @@ export default new Vuex.Store({
             commit('setLoading', true)
 
             // get user data and log user inn
-            firebase.database().ref('/users/' + payload.uid).once('value').then(
+            firebase.database().ref('/users/' + payload.uid).on('value',
                 data => {
                     const user = data.val()
                     commit('setUser', user)
-                }).catch(
+                },
                 error => {
                     console.log(error)
                     commit('setLoading', false)
@@ -270,13 +273,28 @@ export default new Vuex.Store({
             if (payload.offers){
                 user.offers = payload.offers
             }
-            user.subList = payload.subList
+            if (payload.subList){
+                user.subList = payload.subList
+            }
             firebase.database().ref('/users/').child(payload.id).update(user)
                 .then(() => {
                     commit('updateUser', payload)
                     commit('setLoading', false)
                 })
                 .catch(error => {
+                    console.log(error)
+                    commit('setLoading', false)
+                })
+        },
+        removeSub({commit, getters}, payload){
+            commit('setLoading', true)
+            let id = getters.user.id
+            firebase.database().ref('/users/').child(id).child('subList').child(payload).remove()
+                .then(data => {
+                    commit('removeSub', payload)
+                    commit('setLoading', false)
+                })
+                .catch(error => { 
                     console.log(error)
                     commit('setLoading', false)
                 })

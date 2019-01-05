@@ -50,20 +50,6 @@
                                <v-icon light>cached</v-icon>
                            </span>
                     </v-btn>
-                    <v-btn class="red white--text text-xs-center" 
-                           flat
-                           large
-                           style="
-                           width: 90%;
-                           margin: 5px 0;"
-                           type="info" 
-                           @click="onSigninGoogle"
-                           :disabled="loading" 
-                           :loading="loading">Log inn med Google
-                           <span slot="loader" class="custom-loader">
-                               <v-icon light>cached</v-icon>
-                           </span>
-                    </v-btn>
                 </v-flex>
             </v-flex>
         </v-layout>

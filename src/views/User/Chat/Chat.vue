@@ -14,15 +14,17 @@
             </v-layout>
         </v-container>
         <v-container v-else>
-            <v-layout row wrap>
+            <v-layout row>
                 <v-flex xs12 sm8 offset-sm2 class="text-xs-center">
-                    <v-card>
+                    <v-card flat style="border: 1px solid #ccc">
                         <v-container>
-                            <v-layout v-for="(message, i) in messages" :key="`${i}-${message.id}`" class="mb-2">
+                            <v-layout row v-for="(message, i) in messages" :key="`${i}-${message.id}`" class="mb-2">
                                 <v-flex xs12 class="text-xs-right" v-if="message.id === user.id">
-                                    <v-layout row wrap>
-                                        <v-flex xs10>{{ message.message }}</v-flex>
-                                        <v-flex xs2>
+                                    <v-layout row wrap class="text-xs-right" >
+                                        <v-flex xs9 sm11>
+                                            <p class="primary lighten-4 text-xs-left" style="display:inline-block; border-radius: 10px; padding:10px ; color: #455A64; font-size: 120%; overflow-wrap: break-word;">{{ message.message }}</p>
+                                        </v-flex>
+                                        <v-flex xs3 sm1>
                                             <v-avatar size="40px">
                                                 <img :src="getUser(message.id).imageURL">
                                             </v-avatar>
@@ -31,12 +33,14 @@
                                 </v-flex>
                                 <v-flex xs12 class="text-xs-left" v-else>
                                     <v-layout row wrap>
-                                        <v-flex xs2>
+                                        <v-flex xs3 sm1>
                                             <v-avatar size="40px">
                                                 <img :src="getUser(message.id).imageURL">
                                             </v-avatar>
                                         </v-flex>
-                                        <v-flex xs10>{{ message.message }}</v-flex>
+                                        <v-flex xs9 sm11>
+                                            <p class="green lighten-4 text-xs-left" style="display:inline-block; border-radius: 10px; padding:10px ; color: #455A64; font-size: 120%; overflow-wrap: break-word;">{{ message.message }}</p>
+                                        </v-flex>
                                     </v-layout>
                                 </v-flex>
                             </v-layout>
@@ -50,14 +54,14 @@
                             hide-details
                             required>
                         </v-textarea>
+                    </v-card>
                         <v-btn
                             flat 
                             @click="sendMessage"
-                            class="primary"
+                            class="primary mt-2"
                             style="width:100%; margin:0;">
                             Send Melding
                         </v-btn>
-                    </v-card>
                 </v-flex>
             </v-layout>
             <v-layout row wrap>

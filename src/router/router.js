@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AuthGuard from './auth-guard'
+import OutGuard from './out-guard'
 
 Vue.use(Router)
 
@@ -11,7 +12,8 @@ export default new Router({
     {
       path: '/',
       name: 'signin',
-      component: () => import('../views/Signin')
+      component: () => import('../views/Signin'),
+      beforeEnter: OutGuard
     },
     {
       path: '/chat/:id',
@@ -30,7 +32,7 @@ export default new Router({
       path: '/profile/:id',
       name: 'profile',
       props: true,
-      component: () => import('../views/User/Profile'),
+      component: () => import('../views/User/Profile2'),
       beforeEnter: AuthGuard
     },
     {
