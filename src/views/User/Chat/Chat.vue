@@ -25,7 +25,7 @@
                                             <p class="" style="display:block; border-radius: 10px; padding:10px ; color: #455A64; font-size: 120%; overflow-wrap: break-word;">{{ message.message }}</p>
                                         </v-flex>
                                         <v-flex xs3 sm1>
-                                            <v-avatar size="40px">
+                                            <v-avatar size="40px" @click="toChat(message.id)" style="cursor: pointer">
                                                 <img :src="getUser(message.id).imageURL">
                                             </v-avatar>
                                         </v-flex>
@@ -34,7 +34,7 @@
                                 <v-flex xs12 class="text-xs-left" v-else>
                                     <v-layout row wrap>
                                         <v-flex xs3 sm1>
-                                            <v-avatar size="40px">
+                                            <v-avatar size="40px" @click="toChat(message.id)" style="cursor: pointer">
                                                 <img :src="getUser(message.id).imageURL">
                                             </v-avatar>
                                         </v-flex>
@@ -111,6 +111,9 @@ export default {
             })
             this.mess = ''
         },
+        toChat(id){
+            this.$router.push('/profile/' + id)
+        }
     },
     created() {
         this.mess = ''
