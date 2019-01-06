@@ -22,7 +22,7 @@
                                 <v-flex xs12 class="text-xs-right" v-if="message.id === user.id">
                                     <v-layout row wrap class="text-xs-right" >
                                         <v-flex xs9 sm11>
-                                            <p class="primary lighten-4 text-xs-left" style="display:inline-block; border-radius: 10px; padding:10px ; color: #455A64; font-size: 120%; overflow-wrap: break-word;">{{ message.message }}</p>
+                                            <p class="" style="display:block; border-radius: 10px; padding:10px ; color: #455A64; font-size: 120%; overflow-wrap: break-word;">{{ message.message }}</p>
                                         </v-flex>
                                         <v-flex xs3 sm1>
                                             <v-avatar size="40px">
@@ -39,7 +39,7 @@
                                             </v-avatar>
                                         </v-flex>
                                         <v-flex xs9 sm11>
-                                            <p class="green lighten-4 text-xs-left" style="display:inline-block; border-radius: 10px; padding:10px ; color: #455A64; font-size: 120%; overflow-wrap: break-word;">{{ message.message }}</p>
+                                            <p class="" style="display:block; border-radius: 10px; padding:10px ; color: #455A64; font-size: 120%; overflow-wrap: break-word;">{{ message.message }}</p>
                                         </v-flex>
                                     </v-layout>
                                 </v-flex>
