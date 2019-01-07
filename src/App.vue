@@ -10,7 +10,7 @@
                 </router-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-items class="hidden-xs-only" v-if="userIsAuth">
+            <v-toolbar-items class="hidden-xs-only">
                 <v-btn flat v-for="item in menuItems" :key="item.title" :to="item.link">
 
                     <v-icon left>{{ item.icon }}</v-icon>
@@ -60,7 +60,9 @@ export default {
     },
     computed: {
         menuItems () {
-            let menuItems = []
+            let menuItems = [
+                    { icon: 'assignment', title: 'Policy og kontakt info', link: '/policy' },
+            ]
             if (this.userIsAuth) {
                 menuItems = [
                     { icon: 'assignment', title: 'Bestillinger', link: '/requests' },

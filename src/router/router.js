@@ -16,6 +16,12 @@ export default new Router({
       beforeEnter: OutGuard
     },
     {
+      path: '/policy',
+      name: 'policy',
+      component: () => import('../views/Policy'),
+      beforeEnter: OutGuard
+    },
+    {
       path: '/chat/:id',
       name: 'chat',
       props: true,
