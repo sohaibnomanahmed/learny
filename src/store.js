@@ -72,6 +72,8 @@ export default new Vuex.Store({
             var name = ''
 
             firebase.auth().signInWithRedirect(provider)
+
+            firebase.auth().getRedirectResult()
                 .then(result => {
                     var token = result.credential.accessToken
                     var user = result.user
@@ -95,55 +97,6 @@ export default new Vuex.Store({
                             offers: []
                         }
                         console.log(newUser.imageURL)
-                        firebase.database().ref('/users/').child(key).set(newUser)
-                            .then(result => {
-                                commit('setLoading', false)
-                                commit('setUser', newUser)})
-                            .catch(error => {
-                                commit('setLoading', false)
-                                commit('setError', error)
-                                console.log(error)})
-                    } else {
-                          commit('setLoading', false)
-                          commit('setUser', user)
-                    }})
-                .catch(
-                    error => {
-                        commit('setLoading', false)
-                        commit('setError', error)
-                        console.log(error)
-                    }
-                )
-        },
-        signUserInGoogle({ commit }) {
-            commit('setLoading', true)
-            commit('clearError')
-            var provider = new firebase.auth.GoogleAuthProvider()
-            var name = ''
-
-            firebase.auth().signInWithRedirect(provider)
-                .then((result) => {
-                    var token = result.credential.accessToken
-                    var user = result.user
-                    name = user.displayName
-                    return user})
-                .then((user) => {
-                    return firebase.database().ref('/users/' + user.uid).once('value')})
-                .then((data) => {
-                    var key = data.key 
-                    var user = data.val()
-
-                    if (user === null){
-                        const newUser = {
-                            id: key,
-                            name: name,
-                            study: '',
-                            bio: '',
-                            imageURL: "require('../../assets/profile.svg')",
-                            subList: false,
-                            requests: [],
-                            offers: []
-                        }
                         firebase.database().ref('/users/').child(key).set(newUser)
                             .then(result => {
                                 commit('setLoading', false)
