@@ -60,13 +60,16 @@
                 </v-layout>
                 <v-layout row wrap class="text-xs-left" align-center>
                     <v-flex xs12>
-                        <v-card flat v-for="(req, i) in requests" :key="`${i}-${req.id}`" style="border: 1px solid #ccc" class="mb-2">
+                        <v-card flat v-if="requests" v-for="(req, i) in requests" :key="`${i}-${req.id}`" style="border: 1px solid #ccc" class="mb-2">
                             <v-layout row>
                              <v-flex xs4 sm3 class="text-xs-center" @click="toMem(req.creator_id)" style="cursor: pointer">
-                                <v-avatar style="width: 100%; height: auto; margin: 20px;" size="70px">
+                                <v-avatar v-if="getUser(req.creator_id).imageURL" style="width: 100%; height: auto; margin: 20px;" size="70px">
                                     <img 
                                     :src="getUser(req.creator_id).imageURL"
                                     >
+                                </v-avatar>
+                                <v-avatar v-if="!getUser(req.creator_id).imageURL" style="width: 100%; height: auto; margin: 20px;" size="70px">
+                                    <img :src="require('../../assets/profile.svg')">
                                 </v-avatar>
                              </v-flex>
 
@@ -95,6 +98,7 @@
                              </v-flex>
                          </v-layout>
                         </v-card>
+                        <h3 v-else style="color: #ccc">Ingen bestillinger enda</h3>
                     </v-flex>
                 </v-layout>
             </v-flex>

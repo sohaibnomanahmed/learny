@@ -18,16 +18,20 @@
                 <v-flex xs12 sm8 offset-sm2 class="text-xs-left">
                     <v-card flat style="border: 1px solid #ccc">
                         <v-container>
-                        <v-layout row wrap v-for="(chat, i) in chatlist" :key="i" class="mb-2" >
+                        <v-layout row wrap v-if="chatlist" v-for="(chat, i) in chatlist" :key="i" class="mb-2" >
                             <v-btn flat :to="'/chat/' + chat" block large>
                             <v-flex xs12>
-                                <v-avatar size="40px" class="mr-2">
+                                <v-avatar size="40px" class="mr-2" v-if="getUser(chat).imageURL">
                                     <img :src="getUser(chat).imageURL">
+                                </v-avatar>
+                                <v-avatar size="40px" class="mr-2" v-if="!getUser(chat).imageURL">
+                                    <img :src="require('../../../assets/profile.svg')">
                                 </v-avatar>
                                 {{ getUser(chat).name }}
                             </v-flex>
                             </v-btn>
                         </v-layout>
+                        <h3 v-else style="color: #ccc">Ingen bestillinger enda</h3>
                         </v-container>
                     </v-card>
                 </v-flex>

@@ -31,8 +31,11 @@
                         <v-container>
                             <v-layout row wrap >
                                 <v-flex xs3 sm1>
-                                <v-avatar size="40px">
+                                <v-avatar size="40px" v-if="getUser(Luser.id).imageURL">
                                     <img :src="getUser(Luser.id).imageURL">
+                                </v-avatar>
+                                <v-avatar size="40px" v-if="!getUser(Luser.id).imageURL">
+                                    <img :src="require('../../assets/profile.svg')">
                                 </v-avatar>
                                 </v-flex>
                             <v-flex xs9 sm11>

@@ -38,7 +38,7 @@ export default new Router({
       path: '/profile/:id',
       name: 'profile',
       props: true,
-      component: () => import('../views/User/Profile2'),
+      component: () => import('../views/User/Profile'),
       beforeEnter: AuthGuard
     },
     {

@@ -71,9 +71,9 @@ export default new Vuex.Store({
             var provider = new firebase.auth.FacebookAuthProvider()
             var name = ''
 
-            firebase.auth().signInWithRedirect(provider)
+            // firebase.auth().signInWithRedirect(provider)
 
-            firebase.auth().getRedirectResult()
+            firebase.auth().signInWithPopup(provider)
                 .then(result => {
                     var token = result.credential.accessToken
                     var user = result.user
@@ -91,12 +91,11 @@ export default new Vuex.Store({
                             name: name,
                             study: '',
                             bio: '',
-                            imageURL: "/img/profile.217e927d.svg",
+                            imageURL: "",
                             subList: false,
                             requests: [],
                             offers: []
                         }
-                        console.log(newUser.imageURL)
                         firebase.database().ref('/users/').child(key).set(newUser)
                             .then(result => {
                                 commit('setLoading', false)
@@ -287,17 +286,27 @@ export default new Vuex.Store({
                 message: payload.message
             }
 
-            firebase.database().ref('/messages/').child(myID).child(toID).push(message)
-                .then(data => {
-                    firebase.database().ref('/messages/').child(toID).child(myID).push(message)
-                        .then()
-                        .catch()
-                })
-                .catch()
+            if (myID === toID){
+                firebase.database().ref('/messages/').child(myID).child(toID).push(message)
+                    .then(data => {
+                    })
+                    .catch(error => {console.log(error)})
+            } else {
+                firebase.database().ref('/messages/').child(myID).child(toID).push(message)
+                    .then(data => {
+                        firebase.database().ref('/messages/').child(toID).child(myID).push(message)
+                            .then()
+                            .catch(error => {console.log(error)})
+                    })
+                    .catch(error => {console.log(error)})
+            }
         },
         logout({ commit }) {
-            firebase.auth().signOut()
             commit('setUser', null)
+            commit('setMessages', {})
+            commit('setReq', [])
+            commit('setUsers', [])
+            firebase.auth().signOut()
         },
         clearError({ commit }){
             commit('clearError')
