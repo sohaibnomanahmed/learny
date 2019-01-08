@@ -61,7 +61,7 @@ export default {
     computed: {
         menuItems () {
             let menuItems = [
-                    { icon: 'assignment', title: 'Policy og kontakt info', link: '/policy' },
+                    { icon: 'assignment', title: 'Personvern og kontakt info', link: '/policy' },
             ]
             if (this.userIsAuth) {
                 menuItems = [

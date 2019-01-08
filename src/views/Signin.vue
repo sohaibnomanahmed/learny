@@ -33,7 +33,7 @@
                              ></v-img>
                         </v-flex>
                         <v-flex xs12 sm6>
-                            <p style="color: #455A64; font-size: 120%">Finn mentorer for hjelp med å lære noe nytt, løse oppgaver, prøve ut nye ting. Alt fra Eksamener, Obliger, Oppgaver til Idrett og masse annet, ikke vent start nå !</p>
+                            <p style="color: #455A64; font-size: 120%">Finn mentorer for å hjelp med å lære noe nytt, løse oppgaver, forstå faginnhold og få nyttige tips. Alt fra eksamener, obliger og ukes oppgaver til idrett, spill  og masse annet. Du kan også bli en mentor selv, ikke vent start nå !</p>
                         </v-flex>
                     </v-layout>
                     <v-btn class="primary white--text text-xs-center" 

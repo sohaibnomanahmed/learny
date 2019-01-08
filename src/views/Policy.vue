@@ -1,5 +1,7 @@
 <template>
     <v-container>
+        <v-layout row>
+            <v-flex xs12 sm8 offset-sm2>
 <h1>Privacy Policy</h1>
 
 
@@ -126,6 +128,8 @@
         <li>By email: sohaib.n@icloud.com</li>
           
         </ul>
+            </v-flex>
+        </v-layout>
     </v-container>
 </template>
 
