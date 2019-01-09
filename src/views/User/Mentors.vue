@@ -17,7 +17,7 @@
             <v-layout row wrap>
                 <v-flex xs12 sm8 offset-sm2 class="text-xs-left">
                             <v-text-field
-                                label="Søk etter navn eller studie"
+                                label="Søk etter navn, studie elle emne"
                                 v-model="search"
                                 prepend-icon="search"
                                 solo
@@ -79,7 +79,7 @@ export default {
             let searchedUsers = []
             for (let index in allUsers){
                 const regex = new RegExp(this.search, "gi");
-                if (regex.test(allUsers[index].study) || regex.test(allUsers[index].name)){
+                if (regex.test(allUsers[index].study) || regex.test(allUsers[index].name) || this.checkSub(allUsers[index].subList, regex)){
                     searchedUsers.push(allUsers[index])
                 }
             }
@@ -93,7 +93,15 @@ export default {
         }
     },
     methods: {
-        sendMessage(){
+        checkSub(subList, regex){
+            if (subList){
+                for (let key in subList){
+                    if (regex.test(subList[key].sub)){
+                        return true
+                    }
+                }
+            }
+            return false
         },
     },
     created() {
