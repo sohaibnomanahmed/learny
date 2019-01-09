@@ -133,7 +133,10 @@ export default {
         }
     },
     updated(){
-        this.$vuetify.goTo('textarea', 'linear')
+        this.$vuetify.goTo('textarea', {
+            easing: 'linear',
+            duration: 0
+        })
     },
     created() {
         this.mess = ''
