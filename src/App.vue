@@ -13,7 +13,10 @@
             <v-toolbar-items class="hidden-xs-only">
                 <v-btn flat v-for="item in menuItems" :key="item.title" :to="item.link">
 
-                    <v-icon left>{{ item.icon }}</v-icon>
+                    <v-badge left color="red">
+                        <span slot="badge" v-if="item.title === 'Chat' && notf > 0">{{ notf }}</span>
+                        <v-icon left>{{ item.icon }}</v-icon>
+                    </v-badge>
                     {{ item.title }}
                 </v-btn>
                 <v-btn flat v-if="userIsAuth" @click="onLogout">
@@ -55,7 +58,8 @@ export default {
     name: 'App',
     data () {
         return {
-            sideNav: false
+            sideNav: false,
+            notf: 0
         }
     },
     computed: {
@@ -82,6 +86,9 @@ export default {
             this.$store.dispatch('logout')
             this.$router.push('/')
         }
-    }
+    },
+    updated(){
+        this.notf = this.$store.getters.notf
+    },
 }
 </script>

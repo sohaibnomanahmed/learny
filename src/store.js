@@ -11,7 +11,8 @@ export default new Vuex.Store({
         error: null,
         req: [],
         users: [],
-        messages: {}
+        messages: {},
+        notf: 0
     },
     mutations: {
         setUser (state, payload) {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
         },
         setMessages(state, payload){
             state.messages = payload
+        },
+        setNotf(state, payload){
+            state.notf = payload
         },
         updateUser(state, payload){
             let user = state.user
@@ -116,6 +120,9 @@ export default new Vuex.Store({
                     }
                 )
         },
+        checkIfSeenMessage(payload){
+            console.log(payload[0])
+        },
         fetchUserData({ commit }, payload){
             commit('setLoading', true)
 
@@ -158,6 +165,20 @@ export default new Vuex.Store({
                 data => {
                     const messages = data.val()
                     commit('setMessages', messages)
+                    for (let key in messages){
+                        console.log("---new user ---")
+                        let unseen = false
+                        for (let mkey in messages[key]){
+                            let message = messages[key][mkey]
+                            if (message.seen === false && message.id !== payload.id){
+                                unseen = true
+                            }
+                        }
+                        if (unseen){
+                            this.state.notf += 1
+                        }
+                        console.log(this.state.notf)
+                    }
                     commit('setLoading', false)
                 },
                 error => {
@@ -283,7 +304,8 @@ export default new Vuex.Store({
             let toID = payload.to_id
             const message = {
                 id: myID,
-                message: payload.message
+                message: payload.message,
+                seen: false
             }
 
             if (myID === toID){
@@ -300,6 +322,24 @@ export default new Vuex.Store({
                     })
                     .catch(error => {console.log(error)})
             }
+        },
+        seenMessage({commit, getters}, payload){
+            let myID = getters.user.id
+            let toID = myID
+            const seenMessages = payload
+            for (let key in seenMessages){
+                seenMessages[key] = {
+                    id: seenMessages[key].id,
+                    message: seenMessages[key].message,
+                    seen: true
+                }
+                if (seenMessages[key].id !== myID){
+                    toID = seenMessages[key].id
+                }
+            }
+            firebase.database().ref('/messages/').child(myID).child(toID).set(seenMessages)
+                .then(data => {console.log("seen messages")})
+                .catch(error => {console.log(error)})
         },
         logout({ commit }) {
             commit('setUser', null)
@@ -336,6 +376,9 @@ export default new Vuex.Store({
         },
         user(state) {
             return state.user
+        },
+        notf(state) {
+            return state.notf
         },
         users(state) {
             return state.users

@@ -130,6 +130,7 @@ export default {
     },
     created() {
         this.mess = ''
+        this.$store.dispatch('seenMessage', this.messages)
     }
 } 
 </script>

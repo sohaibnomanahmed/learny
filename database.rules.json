@@ -11,9 +11,9 @@
       }
     }, 
     "messages": {
+      ".write": "auth != null",
       "$uid": {
-        ".read": "$uid === auth.uid",
-	    	".write": "$uid === auth.uid"
+        ".read": "$uid === auth.uid"
       }
     },
   }
