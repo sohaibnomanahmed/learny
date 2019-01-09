@@ -75,6 +75,7 @@
             </v-layout>
             <v-layout row wrap>
                 <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
+                    {{ seenMessage }}
                 </v-flex>
             </v-layout>
             <v-layout row wrap>
@@ -108,6 +109,9 @@ export default {
                 return messages
             }
         },
+        seenMessage(){
+            this.$store.dispatch('seenMessage', this.messages)
+        },
         error(){
             return this.$store.getters.error
         },
@@ -130,7 +134,6 @@ export default {
     },
     created() {
         this.mess = ''
-        this.$store.dispatch('seenMessage', this.messages)
     }
 } 
 </script>
