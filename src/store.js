@@ -120,9 +120,6 @@ export default new Vuex.Store({
                     }
                 )
         },
-        checkIfSeenMessage(payload){
-            console.log(payload[0])
-        },
         fetchUserData({ commit }, payload){
             commit('setLoading', true)
 
@@ -165,20 +162,23 @@ export default new Vuex.Store({
                 data => {
                     const messages = data.val()
                     commit('setMessages', messages)
+                        let notf = 0
+
                     for (let key in messages){
-                        console.log("---new user ---")
+                        let l_notf = notf
                         let unseen = false
                         for (let mkey in messages[key]){
                             let message = messages[key][mkey]
-                            if (message.seen === false && message.id !== payload.id){
+                            if (message.seen === false && message.id !== payload.uid){
                                 unseen = true
                             }
                         }
                         if (unseen){
-                            this.state.notf += 1
+                            notf += 1
                         }
-                        console.log(this.state.notf)
                     }
+                        console.log(notf)
+                        commit('setNotf', notf)
                     commit('setLoading', false)
                 },
                 error => {

@@ -59,7 +59,6 @@ export default {
     data () {
         return {
             sideNav: false,
-            notf: 0
         }
     },
     computed: {
@@ -80,15 +79,15 @@ export default {
         userIsAuth () {
             return this.$store.getters.user !== null && this.$store.getters.user !== undefined
         },
+        notf(){
+            return this.$store.getters.notf
+        },
     },
     methods: {
         onLogout() {
             this.$store.dispatch('logout')
             this.$router.push('/')
         }
-    },
-    updated(){
-        this.notf = this.$store.getters.notf
-    },
+    }
 }
 </script>
