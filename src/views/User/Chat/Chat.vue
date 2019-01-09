@@ -132,8 +132,12 @@ export default {
             this.$router.push('/profile/' + id)
         }
     },
+    updated(){
+        this.$vuetify.goTo('textarea', 'linear')
+    },
     created() {
         this.mess = ''
+        //this.$vuetify.goTo(1000, 'linear')
     }
 } 
 </script>

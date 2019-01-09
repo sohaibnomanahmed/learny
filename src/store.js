@@ -162,7 +162,7 @@ export default new Vuex.Store({
                 data => {
                     const messages = data.val()
                     commit('setMessages', messages)
-                        let notf = 0
+                    let notf = 0
 
                     for (let key in messages){
                         let l_notf = notf
@@ -177,8 +177,7 @@ export default new Vuex.Store({
                             notf += 1
                         }
                     }
-                        console.log(notf)
-                        commit('setNotf', notf)
+                    commit('setNotf', notf)
                     commit('setLoading', false)
                 },
                 error => {
