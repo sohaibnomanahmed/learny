@@ -136,14 +136,14 @@ export default {
         }
     },
     updated(){
-        this.$vuetify.goTo('textarea', {
-            easing: 'linear',
-            duration: 0
-        })
     },
     created() {
         this.mess = ''
         //this.$vuetify.goTo(1000, 'linear')
+        this.$vuetify.goTo('textarea', {
+            easing: 'linear',
+            duration: 0
+        })
     }
 } 
 </script>
