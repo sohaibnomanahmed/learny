@@ -35,7 +35,7 @@
                         </v-flex>
                     </v-layout>
 
-                    <v-layout row>
+                    <v-layout row wrap>
                         <v-flex xs12>
                             <v-card flat style="border: 1px solid #ccc" class="mb-2">
                                 <v-card-title>
@@ -108,12 +108,12 @@
                         </v-flex>
                     </v-layout>
 
-                    <v-layout row>
+                    <v-layout row wrap>
                         <v-flex xs12>
                             <v-card flat style="border: 1px solid #ccc">
                                 <v-list>
                                     <v-list-tile>
-                                        <v-list-tile-content><h5>Fag</h5></v-list-tile-content>
+                                        <v-list-tile-content><h5>Emnekode</h5></v-list-tile-content>
                                         <v-list-tile-content class="align-end"><h5>Pris</h5></v-list-tile-content>
                                         <v-list-tile-content class="align-end" v-if="usersProfile">
                                             <v-btn fab small :disabled="true" dark flat color="white">

@@ -14,10 +14,10 @@
             </v-layout>
         </v-container>
         <v-container v-else>
-            <v-layout row wrap>
+            <v-layout row>
                 <v-flex xs12 sm8 offset-sm2 class="text-xs-left">
                             <v-text-field
-                                label="Søk etter navn, studie elle emne"
+                                label="Søk etter navn, studie elle emner"
                                 v-model="search"
                                 prepend-icon="search"
                                 solo
@@ -29,7 +29,7 @@
                             </v-text-field>
                     <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2"  >
                         <v-container>
-                            <v-layout row wrap >
+                            <v-layout row>
                                 <v-flex xs3 sm1>
                                 <v-avatar size="40px" v-if="getUser(Luser.id).imageURL">
                                     <img :src="getUser(Luser.id).imageURL">
@@ -38,9 +38,11 @@
                                     <img :src="require('../../assets/profile.svg')">
                                 </v-avatar>
                                 </v-flex>
-                            <v-flex xs9 sm11>
+                            <v-flex xs9 sm11 style="max-width: 100%; overflow: hidden" >
                                 <div><h4>{{ getUser(Luser.id).name }}</h4></div>
                                 <div>Studie: {{ getUser(Luser.id).study }}</div>
+                                <span>emner: </span>
+                                <span v-for="(index,i) in getUser(Luser.id).subList" :key="`${i}-${index}`">{{ index.sub }}, </span>
                             </v-flex>
                         </v-layout>
                         </v-container>
