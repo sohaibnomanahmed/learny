@@ -82,9 +82,9 @@
                                 </v-card-title>
 
                                 <v-card-text class="py-0">
-                                    <div>{{ req.request }}</div>
-                                    <div>pris: {{ req.price }}</div>
-                                    <div>Sted: {{ req.place }}</div>
+                                    <div style="overflow-wrap: break-word">{{ req.request }}</div>
+                                    <div style="overflow-wrap: break-word">pris: {{ req.price }}</div>
+                                    <div style="overflow-wrap: break-word">Sted: {{ req.place }}</div>
                                 </v-card-text>
 
                                 <v-card-actions> <!-- v-if="getUser(req.creator_id).id !== user.id">-->
