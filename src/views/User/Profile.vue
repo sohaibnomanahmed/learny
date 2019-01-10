@@ -123,8 +123,8 @@
                                     </v-list-tile>
                                     <v-divider></v-divider>
                                     <v-list-tile v-for="(item, i) in subList" :key="item.sub">
-                                        <v-list-tile-content>{{ item.sub }}</v-list-tile-content>
-                                        <v-list-tile-content class="align-end">{{ item.price }}</v-list-tile-content>
+                                        <v-list-tile-content style="max-width:40%; overflow-wrap: break-word;" class="mr-3">{{ item.sub }}</v-list-tile-content>
+                                        <v-list-tile-content style="max-width:40%; overflow-wrap: break-word;" class="align-end">{{ item.price }}</v-list-tile-content>
                                         <v-list-tile-content class="align-end" v-if="usersProfile">
                                             <v-btn fab small dark flat color="red" @click="removeSub(i)">
                                                 <v-icon dark>clear</v-icon>
