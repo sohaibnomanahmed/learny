@@ -133,6 +133,7 @@
                                     </v-list-tile>
                                 </v-list>
                                 <v-divider></v-divider>
+                                        <form @submit.prevent="addSub">
                                 <v-card-actions v-if="usersProfile">
                                     <v-layout row align-center>
                                         <v-flex xs5 class="mr-2">
@@ -162,12 +163,13 @@
                                                     required></v-text-field>
                                         </v-flex>
                                         <v-flex xs1 class="ml-1">
-                                            <v-btn fab small dark flat color="green" @click="addSub">
+                                            <v-btn fab small dark flat color="green" type="submit">
                                                 <v-icon dark>add</v-icon>
                                             </v-btn>
                                         </v-flex>
                                     </v-layout>
                                 </v-card-actions>
+                                        </form>
                             </v-card>
                         </v-flex>
                     </v-layout>

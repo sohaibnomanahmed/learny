@@ -337,7 +337,7 @@ export default new Vuex.Store({
                 }
             }
             firebase.database().ref('/messages/').child(myID).child(toID).set(seenMessages)
-                .then(data => {console.log("seen messages")})
+                .then(data => { })
                 .catch(error => {console.log(error)})
         },
         logout({ commit }) {

@@ -4,6 +4,7 @@
             <v-flex xs12 sm6 offset-sm3>
                 <v-layout row wrap class="text-xs-right mb-3" align-center>
                     <v-flex xs12>
+                        <form @submit.prevent="onSaveChanges">
                         <v-layout>
                             <v-flex xs12>
                         <v-textarea
@@ -50,12 +51,14 @@
                         <v-layout>
                             <v-flex xs12>
                                 <v-btn flat style="width: 100%; margin: 10px 0px" 
-                                    @click="onSaveChanges"
+                                    type="submit"
                                     class="success">
                                     Legg til Bestilling
                                 </v-btn>
                             </v-flex>
                         </v-layout>
+
+                        </form>
                     </v-flex>
                 </v-layout>
                 <v-layout row wrap class="text-xs-left" align-center>
@@ -131,6 +134,9 @@
    },
    methods: {
         onSaveChanges(){
+            if (this.request === '' || this.price === '' || this.place === ''){
+                return 
+            }
             this.$store.dispatch('addReq', {
                 creator_id: this.user.id,
                 request: this.request,

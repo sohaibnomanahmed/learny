@@ -121,6 +121,9 @@ export default {
     },
     methods: {
         sendMessage(){
+            if (this.mess === ''){
+                return
+            }
             this.$store.dispatch('sendMessage', {
                 id: this.user.id,
                 to_id: this.$props.id,
