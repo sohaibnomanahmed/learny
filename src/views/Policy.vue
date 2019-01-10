@@ -2,23 +2,23 @@
     <v-container>
         <v-layout row>
             <v-flex xs12 sm8 offset-sm2>
-<h1>Privacy Policy</h1>
+                <h1>Privacy Policy</h1>
 
 
-<p>Effective date: January 07, 2019</p>
+<p>Effective date: January 10, 2019</p>
 
 
-<p>Scope ("us", "we", or "our") operates the https://scope-37c8f.firebaseapp.com/ website and the Scope mobile application (hereinafter referred to as the "Service").</p>
+<p>Scope ("us", "we", or "our") operates the scope.re website (hereinafter referred to as the "Service").</p>
 
 <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. The Privacy Policy  for Scope is based on the<a href="https://termsfeed.com/blog/sample-privacy-policy-template/">TermsFeed's Privacy Policy Template</a>.</p>
 
-<p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
+<p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, accessible from scope.re</p>
 
 <h2>Definitions</h2>
 <ul>
     <li>
         <p><strong>Service</strong></p>
-                <p>Service means the https://scope-37c8f.firebaseapp.com/ website and the Scope mobile application operated by Scope</p>
+                <p>Service is the scope.re website operated by Scope</p>
             </li>
     <li>
         <p><strong>Personal Data</strong></p>
@@ -43,14 +43,12 @@
 <p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
 
 <ul>
-<li>First name and last name</li><li>Cookies and Usage Data</li>
+<li>Email address</li><li>First name and last name</li><li>Cookies and Usage Data</li>
 </ul>
 
 <h4>Usage Data</h4>
 
-<p>We may also collect information that your browser sends whenever you visit our Service or when you access the Service by or through a mobile device ("Usage Data").</p>
-<p>This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
-<p>When you access the Service by or through a mobile device, this Usage Data may include information such as the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use, unique device identifiers and other diagnostic data.</p>
+<p>We may also collect information how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
 
 <h4>Tracking & Cookies Data</h4>
 <p>We use cookies and similar tracking technologies to track the activity on our Service and we hold certain information.</p>
@@ -64,8 +62,8 @@
 </ul>
 
 <h2>Use of Data</h2>
-    
-<p>Scope uses the collected data for various purposes:</p>    
+
+<p>Scope uses the collected data for various purposes:</p>
 <ul>
     <li>To provide and maintain the Service</li>
     <li>To notify you about changes to our Service</li>
@@ -103,7 +101,7 @@
 <p>We may employ third party companies and individuals to facilitate our Service ("Service Providers"), to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used.</p>
 <p>These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
 
- 
+
 
 
 <h2>Links to Other Sites</h2>
@@ -126,7 +124,7 @@
 <p>If you have any questions about this Privacy Policy, please contact us:</p>
 <ul>
         <li>By email: sohaib.n@icloud.com</li>
-          
+
         </ul>
             </v-flex>
         </v-layout>
