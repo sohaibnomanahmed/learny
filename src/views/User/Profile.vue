@@ -110,7 +110,7 @@
 
                     <v-layout row wrap>
                         <v-flex xs12>
-                            <v-card flat style="border: 1px solid #ccc">
+                            <v-card flat style="border: 1px solid #ccc" v-if="subList || usersProfile">
                                 <v-list>
                                     <v-list-tile>
                                         <v-list-tile-content><h5>Emnekode</h5></v-list-tile-content>
@@ -170,6 +170,20 @@
                                     </v-layout>
                                 </v-card-actions>
                                         </form>
+                            </v-card>
+                            <v-card v-else flat style="border: 1px solid #ccc" >
+                                <v-container>
+                                    <v-layout row>
+                                        <v-flex xs12 class="text-xs-center">
+                                            <v-img
+                                             :src="require('../../assets/blackboard.jpg')"
+                                             contain
+                                             height="150"
+                                             ></v-img>
+                                            <h3 style="color:#455A64">Underviser ingen fag</h3>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
                             </v-card>
                         </v-flex>
                     </v-layout>
