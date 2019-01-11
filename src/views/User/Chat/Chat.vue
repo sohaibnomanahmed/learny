@@ -110,7 +110,13 @@ export default {
             }
         },
         seenMessage(){
-            this.$store.dispatch('seenMessage', this.messages)
+            if (this.messages){
+                this.$store.dispatch('seenMessage', {
+                    mess: this.messages,
+                    id: this.$props.id
+                }
+                )
+            }
         },
         error(){
             return this.$store.getters.error
@@ -136,14 +142,13 @@ export default {
         }
     },
     updated(){
-    },
-    created() {
-        this.mess = ''
-        //this.$vuetify.goTo(1000, 'linear')
         this.$vuetify.goTo('textarea', {
             easing: 'linear',
             duration: 0
         })
+    },
+    created() {
+        this.mess = ''
     }
 } 
 </script>

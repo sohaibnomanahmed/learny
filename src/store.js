@@ -324,16 +324,13 @@ export default new Vuex.Store({
         },
         seenMessage({commit, getters}, payload){
             let myID = getters.user.id
-            let toID = myID
-            const seenMessages = payload
+            let toID = payload.id
+            const seenMessages = payload.mess
             for (let key in seenMessages){
                 seenMessages[key] = {
                     id: seenMessages[key].id,
                     message: seenMessages[key].message,
                     seen: true
-                }
-                if (seenMessages[key].id !== myID){
-                    toID = seenMessages[key].id
                 }
             }
             firebase.database().ref('/messages/').child(myID).child(toID).set(seenMessages)
