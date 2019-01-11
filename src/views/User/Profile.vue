@@ -100,7 +100,7 @@
                                     </v-layout>
                                     <v-layout row v-if="usersProfile" class="mt-2">
                                         <v-flex xs12>
-                                            <v-btn class="success" @click="onSaveChanges" flat block>Lagre endringer</v-btn>
+                                            <v-btn class="success" :disabled="someSave" @click="onSaveChanges" flat block>Lagre endringer</v-btn>
                                         </v-flex>
                                     </v-layout>
                                 </v-container>
@@ -215,6 +215,12 @@ export default {
         error(){
             return this.$store.getters.error
         },
+        someSave(){
+            if (this.study !== this.$store.getters.user.study || this.bio !== this.$store.getters.user.bio){
+                return false
+            }
+            return true
+        },
         loading(){
             return this.$store.getters.loading
         }
@@ -272,6 +278,9 @@ export default {
             this.imageURL = null
         },
         onSaveChanges(){
+            if (this.someSave){
+                return
+            }
             this.$store.dispatch('updateUser', {
                 id: this.user.id,
                 study: this.study,
