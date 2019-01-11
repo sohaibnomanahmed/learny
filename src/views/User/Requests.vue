@@ -91,11 +91,22 @@
                                     <v-btn flat
                                         :to="'/chat/' + getUser(req.creator_id).id"
                                                       block
+                                                      v-if="!usersProfile(req.creator_id)"
                                                       outline
                                                       class="primary primary--text"
                                         >
                                         <!-- <v-icon left light>arrow_forward</v-icon> -->
                                         Send melding
+                                    </v-btn>
+                                    <v-btn flat
+                                                      v-else
+                                                      block
+                                                      outline
+                                                      class="red red--text"
+                                                      @click="delReq(req.id)"
+                                        >
+                                        <!-- <v-icon left light>arrow_forward</v-icon> -->
+                                        Slett
                                     </v-btn>
                                 </v-card-actions>
                              </v-flex>
@@ -143,9 +154,18 @@
                 price: this.price,
                 place: this.place,
             })
+            this.request = ''
+            this.price = ''
+            this.place = ''
         },
+       usersProfile(id){
+           return this.$store.getters.user.id === id
+       },
+       delReq(id){
+            this.$store.dispatch('delReq', id)
+       },
        toMem(id){
-        this.$router.push('/profile/' + id)
+           this.$router.push('/profile/' + id)
        }
    }
  }

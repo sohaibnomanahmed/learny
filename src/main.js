@@ -5,9 +5,11 @@ import router from './router/router'
 import store from './store'
 import firebase from 'firebase'
 import AlertCmp from './components/Alert.vue'
+import ChatView from './views/User/Chat/ChatView'
 
 Vue.config.productionTip = false
 Vue.component('app-alert', AlertCmp)
+Vue.component('chat-view', ChatView)
 
 new Vue({
     router,

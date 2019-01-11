@@ -288,6 +288,18 @@ export default new Vuex.Store({
                     console.log(error)
                 })
         },
+        delReq({commit},payload){
+            firebase.database().ref('/requests/').child(payload).remove()
+                .then(data => {
+                    // commit('removeSub', payload)
+                    // commit('setLoading', false)
+                })
+                .catch(error => { 
+                    console.log(error)
+                    // commit('setLoading', false)
+                })
+
+        },
         getMessages({commit}, payload){
             commit('setLoading', true)
             firebase.database().ref('/messages/').child(payload.id).on('value')
