@@ -16,7 +16,7 @@
         <v-container v-else>
             <v-layout row>
                 <v-flex xs12 sm8 offset-sm2 class="text-xs-center">
-            <chat-view :id="toId" style="height:400px; overflow:scroll;" class="chat-view"></chat-view> 
+            <chat-view :id="toId" style="height:400px; overflow-y:scroll;" class="chat-view"></chat-view> 
                         <v-textarea
                             label="Send en melding?"
                             v-model="mess"
@@ -39,6 +39,7 @@
                             Send Melding
                         </v-btn>
                 </v-flex>
+                {{ messages }}
                 </v-flex>
             </v-layout>
         </v-container>
@@ -66,7 +67,10 @@ export default {
         },
         loading(){
             return this.$store.getters.loading
-        }
+        },
+        messages(){
+            let messages =  this.$store.getters.messages
+        },
     },
     methods: {
         sendMessage(){
