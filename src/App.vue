@@ -26,7 +26,7 @@
             </v-toolbar-items>
         </v-toolbar>
 
-        <v-navigation-drawer temporary v-model="sideNav" absolute v-if="userIsAuth">
+        <v-navigation-drawer temporary v-model="sideNav" absolute v-if="userIsAuth" class=".dra">
             <v-list>
                 <v-list-tile v-for="item in menuItems" :key="item.title" :to="item.link">
                     <v-list-tile-action>
@@ -88,6 +88,12 @@ export default {
             this.$store.dispatch('logout')
             this.$router.push('/')
         }
-    }
+    },
+    updated() {
+        if (sideNav){
+            var container = this.$el.querySelector(".dra")
+            container.scrollTop = 0
+        }
+    },
 }
 </script>
