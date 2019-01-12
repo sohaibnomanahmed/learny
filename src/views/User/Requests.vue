@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm8 offset-sm2>
                 <v-layout row wrap class="text-xs-right mb-3" align-center>
                     <v-flex xs12>
                         <form @submit.prevent="onSaveChanges">

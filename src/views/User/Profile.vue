@@ -15,7 +15,7 @@
         </v-container>
         <v-container v-else>
             <v-layout row wrap>
-                <v-flex xs12 sm6 offset-sm3>
+                <v-flex xs12 sm8 offset-sm2>
                     <v-layout row>
                         <v-flex xs12 class="text-xs-center">
                             <div slot="activator">
@@ -113,8 +113,8 @@
                             <v-card flat style="border: 1px solid #ccc" v-if="subList || usersProfile">
                                 <v-list>
                                     <v-list-tile>
-                                        <v-list-tile-content><h5>Emnekode</h5></v-list-tile-content>
-                                        <v-list-tile-content class="align-end"><h5>Pris</h5></v-list-tile-content>
+                                        <v-list-tile-content style="max-width:40%;"><h5>Emnekode</h5></v-list-tile-content>
+                                        <v-list-tile-content class="align-end" style="max-width:40%;"><h5>Pris</h5></v-list-tile-content>
                                         <v-list-tile-content class="align-end" v-if="usersProfile">
                                             <v-btn fab small :disabled="true" dark flat color="white">
                                                 <v-icon dark></v-icon>
