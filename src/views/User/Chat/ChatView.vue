@@ -33,9 +33,16 @@
                                     </v-layout>
                                 </v-flex>
                             </v-layout>
-                            <v-layout v-else>
-                                <h3 style="color: #ccc">Ingen bestillinger enda</h3>
-                            </v-layout>
+                                    <v-layout row v-else>
+                                        <v-flex xs12 class="text-xs-center">
+                                            <v-img
+                                             :src="require('../../../assets/blackboard.jpg')"
+                                             contain
+                                             height="150"
+                                             ></v-img>
+                                            <h3 style="color:#455A64">Underviser ingen fag</h3>
+                                        </v-flex>
+                                    </v-layout>
                             {{ seenMessage }}
                         </v-container>
                         <span></span>
@@ -68,7 +75,8 @@ export default {
             if (this.messages){
                 this.$store.dispatch('seenMessage', {
                         mess: this.messages,
-                        id: this.$props.id
+                        id: this.$props.id,
+                        userid: this.user.id
                 })
             }
         },

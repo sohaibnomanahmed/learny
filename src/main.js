@@ -2,7 +2,7 @@ import Vue from 'vue'
 import './plugins/vuetify'
 import App from './App.vue'
 import router from './router/router'
-import store from './store'
+import store from './store/store'
 import firebase from 'firebase'
 import AlertCmp from './components/Alert.vue'
 import ChatView from './views/User/Chat/ChatView'
@@ -25,6 +25,8 @@ new Vue({
         })
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
+                this.$store.dispatch('fetchUserRequests', user)
+                this.$store.dispatch('fetchUserMessages', user)
                 this.$store.dispatch('fetchUserData', user)
             }
         })

@@ -1,18 +1,9 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
 import * as firebase from 'firebase'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default {
     state: {
         user: null,
-        loading: false,
-        error: null,
-        req: [],
         users: [],
-        messages: {},
-        notf: 0
     },
     mutations: {
         setUser (state, payload) {
@@ -21,20 +12,8 @@ export default new Vuex.Store({
         setUsers (state, payload){
             state.users = payload
         },
-        addReq (state, payload){
-            state.req.push(payload)
-        },
-        setReq (state, payload){
-            state.req = payload
-        },
         removeSub (state, payload){
             state.user.subList.splice(payload, 1)
-        },
-        setMessages(state, payload){
-            state.messages = payload
-        },
-        setNotf(state, payload){
-            state.notf = payload
         },
         updateUser(state, payload){
             let user = state.user
@@ -57,15 +36,6 @@ export default new Vuex.Store({
             if (payload.offers){
                 user.offers = payload.offers
             }
-        },
-        setLoading (state, payload) {
-            state.loading = payload
-        },
-        setError (state, payload) {
-            state.error = payload
-        },
-        clearError (state, payload) {
-            state.error = null
         }
     },
     actions: {
@@ -156,56 +126,6 @@ export default new Vuex.Store({
                     console.log(error)
                     commit('setLoading', false)
                 })
-
-            // load in messages
-            firebase.database().ref('/messages/').child(payload.uid).on('value',
-                data => {
-                    const messages = data.val()
-                    commit('setMessages', messages)
-                    let notf = 0
-
-                    for (let key in messages){
-                        let l_notf = notf
-                        let unseen = false
-                        for (let mkey in messages[key]){
-                            let message = messages[key][mkey]
-                            if (message.seen === false && message.id !== payload.uid){
-                                unseen = true
-                            }
-                        }
-                        if (unseen){
-                            notf += 1
-                        }
-                    }
-                    commit('setNotf', notf)
-                    commit('setLoading', false)
-                },
-                error => {
-                    console.log(error)
-                    commit('setLoading', false)
-                })
-
-            // load in requests
-            firebase.database().ref('/requests/').on('value',
-                data => {
-                    const req = []
-                    const obj = data.val()
-                    for (let key in obj) {
-                        req.push({
-                            id: key,
-                            creator_id: obj[key].creator_id,
-                            place: obj[key].place,
-                            price: obj[key].price,
-                            request: obj[key].request,
-                        })
-                    }
-                    commit('setReq', req)
-                    commit('setLoading', false)
-                },
-                error => {
-                    console.log(error)
-                    commit('setLoading', false)
-                })
         },
         updateImage({commit, getters}, payload){
             let key = payload.id
@@ -271,104 +191,15 @@ export default new Vuex.Store({
                     commit('setLoading', false)
                 })
         },
-        addReq({commit}, payload){
-            const req = payload
-            commit('setLoading', true)
-            firebase.database().ref('/requests/').push(req)
-                .then(data => {
-                    // let key = data.key
-                    commit('setLoading', false)
-                    // commit('addReq', {
-                    //     ...req,
-                    //     id: key
-                    // })
-                })
-                .catch(error => {
-                    commit('setLoading', false)
-                    console.log(error)
-                })
-        },
-        delReq({commit},payload){
-            firebase.database().ref('/requests/').child(payload).remove()
-                .then(data => {
-                    // commit('removeSub', payload)
-                    // commit('setLoading', false)
-                })
-                .catch(error => { 
-                    console.log(error)
-                    // commit('setLoading', false)
-                })
-
-        },
-        getMessages({commit}, payload){
-            commit('setLoading', true)
-            firebase.database().ref('/messages/').child(payload.id).on('value')
-                .then(data => {
-                    console.log(data)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        },
-        sendMessage({commit}, payload){
-            let myID = payload.id
-            let toID = payload.to_id
-            const message = {
-                id: myID,
-                message: payload.message,
-                seen: false
-            }
-
-            if (myID === toID){
-                firebase.database().ref('/messages/').child(myID).child(toID).push(message)
-                    .then(data => {
-                    })
-                    .catch(error => {console.log(error)})
-            } else {
-                firebase.database().ref('/messages/').child(myID).child(toID).push(message)
-                    .then(data => {
-                        firebase.database().ref('/messages/').child(toID).child(myID).push(message)
-                            .then()
-                            .catch(error => {console.log(error)})
-                    })
-                    .catch(error => {console.log(error)})
-            }
-        },
-        seenMessage({commit, getters}, payload){
-            let myID = getters.user.id
-            let toID = payload.id
-            const seenMessages = payload.mess
-            for (let key in seenMessages){
-                seenMessages[key] = {
-                    id: seenMessages[key].id,
-                    message: seenMessages[key].message,
-                    seen: true
-                }
-            }
-            firebase.database().ref('/messages/').child(myID).child(toID).set(seenMessages)
-                .then(data => { })
-                .catch(error => {console.log(error)})
-        },
         logout({ commit }) {
             commit('setUser', null)
             commit('setMessages', {})
             commit('setReq', [])
             commit('setUsers', [])
             firebase.auth().signOut()
-        },
-        clearError({ commit }){
-            commit('clearError')
         }
     },
     getters: {
-        // loadedMeetups (state) {
-        //     return state.loadedMeetups.sort((meetupA, meetupB) => {
-        //         return meetupA.date > meetupB.date
-        //     })
-        // },
-        // featuredMeetups (state, getters) {
-        //     return getters.loadedMeetups.slice(0, 5)
-        // },
         getUser (state) {
             return (userId) => {
                 return state.users.find((user) => {
@@ -376,26 +207,11 @@ export default new Vuex.Store({
                 })
             }
         },
-        messages(state) {
-            return state.messages
-        },
-        req(state) {
-            return state.req.reverse()
-        },
         user(state) {
             return state.user
         },
-        notf(state) {
-            return state.notf
-        },
         users(state) {
             return state.users
-        },
-        loading(state){
-            return state.loading
-        },
-        error(state){
-            return state.error
         }
     }
-})
+}
