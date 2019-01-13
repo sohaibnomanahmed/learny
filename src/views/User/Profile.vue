@@ -319,7 +319,11 @@ export default {
             return this.$store.getters.user.id === this.id
         },
         rev(){
-            return this.$store.getters.rev[this.$props.id]
+            if (this.$store.getters.rev){
+                return this.$store.getters.rev[this.$props.id]
+            } else {
+                return null
+            }
         },
         error(){
             return this.$store.getters.error
