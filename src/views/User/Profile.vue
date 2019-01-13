@@ -208,14 +208,41 @@
             <v-layout row wrap class="mt-2">
                 <v-flex>
                     <v-card flat style="border: 1px solid #ccc">
-                        <v-layout row wrap v-if="rev.length != 0">
-                            <v-container>
+                            <v-card-title>
+                                            <h4>Omtaler</h4>
+                            </v-card-title>
+                                <v-divider></v-divider>
+                        <v-layout row wrap v-if="rev">
                                 <v-layout row wrap v-for="(r,i) in rev" :key="`${i}-${r}`">
-                                    <v-flex xs12>
-                                        {{ r.review }}
+                                     <v-flex xs3 sm2 class="text-xs-center" @click="toMem(r.creator_id)" style="cursor: pointer">
+                                        <v-avatar v-if="getUser(r.creator_id).imageURL" style="width: 100%; height: auto; margin: 20px;" size="50px">
+                                            <img 
+                                            :src="getUser(r.creator_id).imageURL"
+                                            >
+                                        </v-avatar>
+                                        <v-avatar v-if="!getUser(r.creator_id).imageURL" style="width: 100%; height: auto; margin: 20px;" size="50px">
+                                            <img :src="require('../../assets/profile.svg')">
+                                        </v-avatar>
+                                     </v-flex>
+
+                                     <v-flex xs7 sm8>
+                                        <v-card-title primary @click="toMem(r.creator_id)" style="cursor: pointer;" class="pb-1" >
+                                            <h3>{{ getUser(r.creator_id).name }}</h3>
+                                        </v-card-title>
+
+                                        <v-card-text class="py-0">
+                                            <div style="overflow-wrap: break-word">{{ r.review }}</div>
+                                        </v-card-text>
+                                    </v-flex>
+
+                                    <v-flex xs1 sm1 align-center>
+                                            <v-btn v-if="r.creator_id == user.id" fab small outline 
+                                                @click="delRev(i)"
+                                                class="mt-4 red red--text">
+                                                <v-icon small>clear</v-icon>
+                                            </v-btn>
                                     </v-flex>
                                 </v-layout>
-                            </v-container>
                         </v-layout>
                         <v-layout row v-else>
                             <v-container>
@@ -292,7 +319,7 @@ export default {
             return this.$store.getters.user.id === this.id
         },
         rev(){
-            return this.$store.getters.rev
+            return this.$store.getters.rev[this.$props.id]
         },
         error(){
             return this.$store.getters.error
@@ -337,6 +364,13 @@ export default {
                 id: this.user.id,
                 to: this.$props.id,
                 rev: this.review
+            })
+            this.review = ''
+        },
+        delRev(id){
+            this.$store.dispatch('delRev', {
+                id: id,
+                user_id: this.$props.id
             })
         },
         removeSub(i){
@@ -386,7 +420,10 @@ export default {
             this.bio = this.getUser(this.$props.id).bio
             this.subList = this.getUser(this.$props.id).subList
             this.edit = !this.edit
-        }
+        },
+       toMem(id){
+           this.$router.push('/profile/' + id)
+       }
     },
     updated(){
         this.subList = this.getUser(this.$props.id).subList

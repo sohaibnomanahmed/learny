@@ -2,12 +2,9 @@ import * as firebase from 'firebase'
 
 export default {
     state: {
-        rev: [],
+        rev: {},
     },
     mutations: {
-        addRev (state, payload){
-            state.rev.push(payload)
-        },
         setRev (state, payload){
             state.rev = payload
         }
@@ -17,18 +14,10 @@ export default {
             commit('setLoading', true)
 
             // load in requests
-            firebase.database().ref('/reviews/').child(payload.uid).on('value',
+            firebase.database().ref('/reviews/').on('value',
                 data => {
-                    const rev = []
                     const obj = data.val()
-                    for (let key in obj) {
-                        rev.push({
-                            id: key,
-                            creator_id: obj[key].creator_id,
-                            review: obj[key].review,
-                        })
-                    }
-                    commit('setRev', rev)
+                    commit('setRev', obj)
                     commit('setLoading', false)
                 },
                 error => {
@@ -44,12 +33,7 @@ export default {
             commit('setLoading', true)
             firebase.database().ref('/reviews/').child(payload.to).push(req)
                 .then(data => {
-                    // let key = data.key
                     commit('setLoading', false)
-                    // commit('addReq', {
-                    //     ...req,
-                    //     id: key
-                    // })
                 })
                 .catch(error => {
                     commit('setLoading', false)
@@ -57,7 +41,7 @@ export default {
                 })
         },
         delRev({commit},payload){
-            firebase.database().ref('/reviews/').child(payload).remove()
+            firebase.database().ref('/reviews/').child(payload.user_id).child(payload.id).remove()
                 .then(data => {
                     // commit('removeSub', payload)
                     // commit('setLoading', false)
@@ -71,7 +55,7 @@ export default {
     },
     getters: {
         rev(state) {
-            return state.rev.reverse()
+            return state.rev
         }
     }
 }

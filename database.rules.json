@@ -16,5 +16,11 @@
         ".read": "$uid === auth.uid"
       }
     },
+    "reviews": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "$uid !== auth.uid"
+      }
+    }
   }
 }
