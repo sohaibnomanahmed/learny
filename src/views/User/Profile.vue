@@ -15,7 +15,7 @@
         </v-container>
         <v-container v-else>
             <v-layout row wrap>
-                <v-flex xs12 sm6 offset-sm3>
+                <v-flex xs12 sm8 md6 offset-sm2 offset-md3>
                     <v-layout row>
                         <v-flex xs12 class="text-xs-center">
                             <div slot="activator">
@@ -44,10 +44,10 @@
                                 <v-divider></v-divider>
                                 <v-container>
                                     <v-layout row wrap align-center class="mt-2">
-                                        <v-flex xs1>
+                                        <v-flex xs2 sm1>
                                             <v-icon>face</v-icon>
                                         </v-flex>
-                                        <v-flex xs11>
+                                        <v-flex xs10 sm11>
                                             <v-text-field
                                                                v-model="name"
                                                                v-if="usersProfile && edit"
@@ -62,10 +62,10 @@
                                         </v-flex>
                                     </v-layout>
                                     <v-layout row wrap align-center class="mt-2">
-                                        <v-flex xs1>
+                                        <v-flex xs2 sm1>
                                             <v-icon>school</v-icon>
                                         </v-flex>
-                                        <v-flex xs11>
+                                        <v-flex xs10 sm11>
                                             <v-text-field
                                                                label="Studie"
                                                                v-model="study"
@@ -81,10 +81,10 @@
                                         </v-flex>
                                     </v-layout>
                                     <v-layout row wrap align-center class="mt-2">
-                                        <v-flex xs1>
+                                        <v-flex xs2 sm1>
                                             <v-icon>receipt</v-icon>
                                         </v-flex>
-                                        <v-flex xs11>
+                                        <v-flex xs10 sm11>
                                             <v-textarea
                                                                placeholder="Add bio"
                                                                v-model="bio"

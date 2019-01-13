@@ -31,7 +31,7 @@
                     <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2">
                         <v-container>
                             <v-layout row>
-                                <v-flex xs3 sm1>
+                                <v-flex xs3 sm2 md1>
                                 <v-avatar size="40px" v-if="getUser(Luser.id).imageURL">
                                     <img :src="getUser(Luser.id).imageURL">
                                 </v-avatar>
@@ -39,7 +39,7 @@
                                     <img :src="require('../../assets/profile.svg')">
                                 </v-avatar>
                                 </v-flex>
-                            <v-flex xs9 sm11 style="max-width: 100%; overflow: hidden" >
+                            <v-flex xs9 sm10 md11 style="max-width: 100%; overflow: hidden" >
                                 <div><h4>{{ getUser(Luser.id).name }}</h4></div>
                                 <div>Studie: {{ getUser(Luser.id).study }}</div>
                                 <span>emner: </span>
