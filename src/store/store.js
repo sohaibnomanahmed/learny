@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import User from './user'
 import Messages from './messages'
 import Requests from './requests'
+import Reviews from './reviews'
 import Shared from './shared'
 import * as firebase from 'firebase'
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     modules: {
         user: User,
         requests: Requests,
+        reviews: Reviews,
         messages: Messages,
         shared: Shared
     },

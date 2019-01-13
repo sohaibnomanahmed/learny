@@ -26,6 +26,7 @@ new Vue({
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.$store.dispatch('fetchUserRequests', user)
+                this.$store.dispatch('fetchUserReviews', user)
                 this.$store.dispatch('fetchUserMessages', user)
                 this.$store.dispatch('fetchUserData', user)
             }

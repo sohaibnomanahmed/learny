@@ -126,8 +126,8 @@
                                     <v-layout>
                                         <v-container>
                                             <v-layout row align-center>
-                                        <v-flex xs4 sm5 ><h5>Emnekode</h5></v-flex>
-                                        <v-flex xs4 sm5 class="align-end"><h5>Pris</h5></v-flex>
+                                        <v-flex xs4 sm5 ><h4>Emnekode</h4></v-flex>
+                                        <v-flex xs4 sm5 class="align-end"><h4>Pris</h4></v-flex>
                                         <v-flex xs2 sm1 class="align-end" v-if="usersProfile">
                                             <v-btn fab small :disabled="true" class="ma-0" dark flat color="white">
                                                 <v-icon dark></v-icon>
@@ -205,6 +205,50 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
+            <v-layout row wrap class="mt-2">
+                <v-flex>
+                    <v-card flat style="border: 1px solid #ccc">
+                        <v-layout row wrap v-if="rev.length != 0">
+                            <v-container>
+                                <v-layout row wrap v-for="(r,i) in rev" :key="`${i}-${r}`">
+                                    <v-flex xs12>
+                                        {{ r.review }}
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-layout>
+                        <v-layout row v-else>
+                            <v-container>
+                                <v-layout row wrap>
+                            <v-flex xs12 class="text-xs-center">
+                                <v-img
+                                 :src="require('../../assets/rev.jpg')"
+                                 contain
+                                 height="200"
+                                 ></v-img>
+                                <h3 style="color:#455A64">Ingen omtaler</h3>
+                            </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-layout>
+                            <v-divider></v-divider>
+                            <v-layout row v-if="!usersProfile">
+                                <v-flex xs12>
+                                    <v-textarea
+                                        label="Skrive en omtale"
+                                        v-model="review"
+                                        
+                                        solo
+                                        flat
+                                        hide-details
+                                        required>
+                                    </v-textarea>
+                                    <v-btn small flat outline fab class="success success--text" @click="addRev"><v-icon>add</v-icon></v-btn>
+                                </v-flex>
+                            </v-layout>
+                    </v-card>
+                </v-flex>
+            </v-layout>
                     <v-btn
                         block
                         flat
@@ -215,6 +259,7 @@
                         Send melding</v-btn>
                 </v-flex>
             </v-layout>
+            
         </v-container>
     </div>
 </template>
@@ -232,6 +277,7 @@ export default {
             study: '',
             sub: '',
             price: '',
+            review: '',
             edit: false
         }
     },
@@ -244,6 +290,9 @@ export default {
         },
         usersProfile(){
             return this.$store.getters.user.id === this.id
+        },
+        rev(){
+            return this.$store.getters.rev
         },
         error(){
             return this.$store.getters.error
@@ -279,6 +328,16 @@ export default {
             })
             this.price = ''
             this.sub = ''
+        },
+        addRev(){
+            if(this.review === ''){
+                return
+            }
+            this.$store.dispatch('addRev', {
+                id: this.user.id,
+                to: this.$props.id,
+                rev: this.review
+            })
         },
         removeSub(i){
             this.$store.dispatch('removeSub',i)
