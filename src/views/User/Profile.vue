@@ -15,7 +15,7 @@
         </v-container>
         <v-container v-else>
             <v-layout row wrap>
-                <v-flex xs12 sm8 offset-sm2>
+                <v-flex xs12 sm6 offset-sm3>
                     <v-layout row>
                         <v-flex xs12 class="text-xs-center">
                             <div slot="activator">
@@ -29,8 +29,8 @@
                                     <img :src="getUser(this.$props.id).imageURL">
                                 </v-avatar>
                             </div>
-                            <v-btn v-if="usersProfile" @click="onPickFile" class="mb-3">Endre Bildet</v-btn>
-                            <v-btn v-if="usersProfile && imageURL !== null" @click="onSaveImage" class="success mb-3">Lagre</v-btn>
+                            <v-btn v-if="usersProfile" outline flat @click="onPickFile" class="mb-3">Endre Bildet</v-btn>
+                            <v-btn v-if="usersProfile && imageURL !== null" flat @click="onSaveImage" class="success mb-3">Lagre</v-btn>
                             <input type="file" style="display: None" ref="fileInput" accept="image/*" @change="onFilePicked"></input>
                         </v-flex>
                     </v-layout>
@@ -43,14 +43,14 @@
                                 </v-card-title>
                                 <v-divider></v-divider>
                                 <v-container>
-                                    <v-layout row align-center class="mt-2">
+                                    <v-layout row wrap align-center class="mt-2">
                                         <v-flex xs1>
                                             <v-icon>face</v-icon>
                                         </v-flex>
                                         <v-flex xs11>
                                             <v-text-field
                                                                v-model="name"
-                                                               v-if="usersProfile"
+                                                               v-if="usersProfile && edit"
                                                                solo
                                                                flat
                                                                hide-details
@@ -58,10 +58,10 @@
                                                                style="border: 1px dotted #ccc"
                                                                >
                                             </v-text-field>
-                                                <h4 style="color: #455A64" v-else>{{ name }}</h4>
+                                                <h4 style="color: #455A64" v-else>{{ getUser(this.$props.id).name }}</h4>
                                         </v-flex>
                                     </v-layout>
-                                    <v-layout row align-center class="mt-2">
+                                    <v-layout row wrap align-center class="mt-2">
                                         <v-flex xs1>
                                             <v-icon>school</v-icon>
                                         </v-flex>
@@ -69,18 +69,18 @@
                                             <v-text-field
                                                                label="Studie"
                                                                v-model="study"
-                                                               v-if="usersProfile"
+                                                               v-if="usersProfile && edit"
                                                                solo
                                                                flat
                                                                hide-details
                                                                style="border: 1px dotted #ccc"
                                                                >
                                             </v-text-field>
-                                                <h4 style="color: #455A64" v-else>{{ study }}</h4>
+                                                <h4 style="color: #455A64" v-else>{{ getUser(this.$props.id).study }}</h4>
 
                                         </v-flex>
                                     </v-layout>
-                                    <v-layout row align-center class="mt-2">
+                                    <v-layout row wrap align-center class="mt-2">
                                         <v-flex xs1>
                                             <v-icon>receipt</v-icon>
                                         </v-flex>
@@ -88,19 +88,31 @@
                                             <v-textarea
                                                                placeholder="Add bio"
                                                                v-model="bio"
-                                                               v-if="usersProfile"
+                                                               v-if="usersProfile && edit" 
                                                                solo
                                                                flat
                                                                hide-details
                                                                style="border: 1px dotted #ccc"
                                                                >
                                             </v-textarea>
-                                                <h4 style="color: #455A64" v-else>{{ bio }}</h4>
+                                                <h4 style="color: #455A64" v-else>{{ getUser(this.$props.id).bio }}</h4>
                                         </v-flex>
                                     </v-layout>
                                     <v-layout row v-if="usersProfile" class="mt-2">
-                                        <v-flex xs12>
-                                            <v-btn class="success" :disabled="someSave" @click="onSaveChanges" flat block>Lagre endringer</v-btn>
+                                        <v-flex xs12 v-if="!edit">
+                                            <v-btn class="" 
+                                                @click="makeEdit" flat block>Endre</v-btn>
+                                        </v-flex>
+                                        <v-flex xs12 v-else>
+                                            <v-btn class="green green--text" 
+                                                   outline
+                                                :disabled="someSave"
+                                                   
+                                                @click="onSaveChanges" flat block>Lagre endringer</v-btn>
+                                            <v-btn class="red red--text" 
+                                                   
+                                                   outline
+                                                @click="edit = !edit" flat block>Avbryt</v-btn>
                                         </v-flex>
                                     </v-layout>
                                 </v-container>
@@ -111,27 +123,33 @@
                     <v-layout row wrap>
                         <v-flex xs12>
                             <v-card flat style="border: 1px solid #ccc" v-if="subList || usersProfile">
-                                <v-list>
-                                    <v-list-tile>
-                                        <v-list-tile-content style="max-width:40%;"><h5>Emnekode</h5></v-list-tile-content>
-                                        <v-list-tile-content class="align-end" style="max-width:40%;"><h5>Pris</h5></v-list-tile-content>
-                                        <v-list-tile-content class="align-end" v-if="usersProfile">
-                                            <v-btn fab small :disabled="true" dark flat color="white">
+                                    <v-layout>
+                                        <v-container>
+                                            <v-layout row align-center>
+                                        <v-flex xs4 sm5 ><h5>Emnekode</h5></v-flex>
+                                        <v-flex xs4 sm5 class="align-end"><h5>Pris</h5></v-flex>
+                                        <v-flex xs2 sm1 class="align-end" v-if="usersProfile">
+                                            <v-btn fab small :disabled="true" class="ma-0" dark flat color="white">
                                                 <v-icon dark></v-icon>
                                             </v-btn>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
+                                        </v-flex>
+                                        </v-layout>
+                                        </v-container>
+                                    </v-layout>
                                     <v-divider></v-divider>
-                                    <v-list-tile v-for="(item, i) in subList" :key="item.sub">
-                                        <v-list-tile-content style="max-width:40%; overflow-wrap: break-word;" class="mr-3">{{ item.sub }}</v-list-tile-content>
-                                        <v-list-tile-content style="max-width:40%; overflow-wrap: break-word;" class="align-end">{{ item.price }}</v-list-tile-content>
-                                        <v-list-tile-content class="align-end" v-if="usersProfile">
-                                            <v-btn fab small dark flat color="red" @click="removeSub(i)">
+                                    <v-layout row wrap v-for="(item, i) in subList" :key="item.sub">
+                                        <v-container>
+                                            <v-layout row wrap align-center>
+                                        <v-flex xs4 sm5 style="overflow-wrap: break-word;" class="mr-2">{{ item.sub }}</v-flex>
+                                        <v-flex xs4 sm5 style="overflow-wrap: break-word;" class="align-end">{{ item.price }}</v-flex>
+                                        <v-flex  xs2 sm1 class="align-end" v-if="usersProfile">
+                                            <v-btn fab small dark flat color="red" class="ma-0" @click="removeSub(i)">
                                                 <v-icon dark>clear</v-icon>
                                             </v-btn>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list>
+                                        </v-flex>
+                                        </v-layout>
+                                        </v-container>
+                                    </v-layout>
                                 <v-divider></v-divider>
                                         <form @submit.prevent="addSub">
                                 <v-card-actions v-if="usersProfile">
@@ -178,7 +196,7 @@
                                             <v-img
                                              :src="require('../../assets/blackboard.jpg')"
                                              contain
-                                             height="150"
+                                             height="200"
                                              ></v-img>
                                             <h3 style="color:#455A64">Underviser ingen fag</h3>
                                         </v-flex>
@@ -213,7 +231,8 @@ export default {
             bio: '',
             study: '',
             sub: '',
-            price: ''
+            price: '',
+            edit: false
         }
     },
     computed: {
@@ -300,16 +319,24 @@ export default {
                 study: this.study,
                 bio: this.bio,
             })
+            this.edit = !this.edit
+        },
+        makeEdit(){
+            this.name = this.getUser(this.$props.id).name
+            this.study = this.getUser(this.$props.id).study
+            this.bio = this.getUser(this.$props.id).bio
+            this.subList = this.getUser(this.$props.id).subList
+            this.edit = !this.edit
         }
     },
     updated(){
         this.subList = this.getUser(this.$props.id).subList
     },
-    created() {
-        this.name = this.getUser(this.$props.id).name
-        this.study = this.getUser(this.$props.id).study
-        this.bio = this.getUser(this.$props.id).bio
-        this.subList = this.getUser(this.$props.id).subList
+    mounted() {
+            this.name = this.getUser(this.$props.id).name
+            this.study = this.getUser(this.$props.id).study
+            this.bio = this.getUser(this.$props.id).bio
+            this.subList = this.getUser(this.$props.id).subList
     }
 } 
 </script>

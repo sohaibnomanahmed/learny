@@ -91,3 +91,9 @@ export default {
     }
 }
 </script>
+
+<style>
+* {
+    overflow-wrap: break-word;
+}
+</style>

@@ -16,7 +16,7 @@
         <v-container v-else>
             <v-layout row wrap>
                 <v-flex xs12 sm8 offset-sm2 class="text-xs-left">
-                    <v-card flat style="border: 1px solid #ccc">
+                    <v-card flat style="border: 1px solid #ccc" v-if="messages.length != 0">
                         <v-container>
                         <v-layout row wrap v-if="messages" v-for="(id, i) in messages" :key="i" class="mb-1" @click="toMess(id)" style="cursor: pointer">
                             <v-flex xs12 class="blue lighten-5 pa-3" v-if="!checkMessNotf(id).seen">
@@ -63,14 +63,20 @@
                         <h3 v-else style="color: #ccc">Ingen bestillinger enda</h3>
                         </v-container>
                     </v-card>
-                </v-flex>
-            </v-layout>
-            <v-layout row wrap>
-                <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
-                </v-flex>
-            </v-layout>
-            <v-layout row wrap>
-                <v-flex xs12 sm6 offset-sm3 class="text-xs-center">
+                    <v-card v-else flat style="border: 1px solid #ccc" >
+                        <v-container>
+                            <v-layout row>
+                                <v-flex xs12 class="text-xs-center">
+                                    <v-img
+                                     :src="require('../../../assets/chat.jpg')"
+                                     contain
+                                     height="200"
+                                     ></v-img>
+                                    <h3 style="color:#455A64">Du har ingen meldinger</h3>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card>
                 </v-flex>
             </v-layout>
         </v-container>

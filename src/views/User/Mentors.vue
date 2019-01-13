@@ -27,7 +27,8 @@
                                 class="mb-3 pl-2"
                                 >
                             </v-text-field>
-                    <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2"  >
+                                <div v-if="users.length != 0">
+                    <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2">
                         <v-container>
                             <v-layout row>
                                 <v-flex xs3 sm1>
@@ -42,11 +43,26 @@
                                 <div><h4>{{ getUser(Luser.id).name }}</h4></div>
                                 <div>Studie: {{ getUser(Luser.id).study }}</div>
                                 <span>emner: </span>
-                                <span v-for="(index,i) in getUser(Luser.id).subList" :key="`${i}-${index}`">{{ index.sub }}, </span>
+                                <span v-for="(index,i) in getUser(Luser.id).subList" :key="`${i}-${index}`">{{ index.sub }} </span>
                             </v-flex>
                         </v-layout>
                         </v-container>
                     </v-card>
+                                </div>
+                                <div v-else>
+                        <v-container>
+                            <v-layout row>
+                                <v-flex xs12 class="text-xs-center">
+                                    <v-img
+                                     :src="require('../../assets/mentor.png')"
+                                     contain
+                                     height="250"
+                                     ></v-img>
+                                    <h3 style="color:#455A64">Fant ingen mentorer som matchet søket ditt</h3>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                                </div>
                 </v-flex>
             </v-layout>
         </v-container>

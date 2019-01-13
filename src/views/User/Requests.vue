@@ -82,8 +82,8 @@
                                 </v-card-title>
 
                                 <v-card-text class="py-0">
-                                    <div style="overflow-wrap: break-word">{{ req.request }}</div>
-                                    <div style="overflow-wrap: break-word">pris: {{ req.price }}</div>
+                                    <div style="overflow-wrap: break-word">Trenger hjelp med: {{ req.request }}</div>
+                                    <div style="overflow-wrap: break-word">Pris: {{ req.price }}</div>
                                     <div style="overflow-wrap: break-word">Sted: {{ req.place }}</div>
                                 </v-card-text>
 
