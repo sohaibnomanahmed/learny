@@ -126,7 +126,7 @@
                                     <v-layout>
                                         <v-container>
                                             <v-layout row align-center>
-                                        <v-flex xs4 sm5 ><h4>Emnekode</h4></v-flex>
+                                        <v-flex xs4 sm5 ><h4>Underviser Emnene</h4></v-flex>
                                         <v-flex xs4 sm5 class="align-end"><h4>Pris</h4></v-flex>
                                         <v-flex xs2 sm1 class="align-end" v-if="usersProfile">
                                             <v-btn fab small :disabled="true" class="ma-0" dark flat color="white">
@@ -157,7 +157,7 @@
                                         <v-flex xs5 class="mr-2">
                                             <v-text-field
                                                     name="sub"
-                                                    placeholder="Fag"
+                                                    placeholder="Emnekode"
                                                     id="sub"
                                                     v-model="sub"
                                                     type="sub"

@@ -42,7 +42,7 @@
                             <v-flex xs9 sm10 md11 style="max-width: 100%; overflow: hidden" >
                                 <div><h4>{{ getUser(Luser.id).name }}</h4></div>
                                 <div>Studie: {{ getUser(Luser.id).study }}</div>
-                                <span>emner: </span>
+                                <span>Underviser: </span>
                                 <span v-for="(index,i) in getUser(Luser.id).subList" :key="`${i}-${index}`">{{ index.sub }} </span>
                             </v-flex>
                         </v-layout>

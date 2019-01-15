@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout>
-            <v-flex xs12 sm8 offset-sm2>
+            <v-flex xs12 sm8 md6 offset-sm2 offset-md3>
                 <v-layout row wrap class="text-xs-right mb-3" align-center>
                     <v-flex xs12>
                         <form @submit.prevent="onSaveChanges">
@@ -22,7 +22,7 @@
                         <v-layout>
                             <v-flex xs6>
                                 <v-text-field
-                                    label="Pris"
+                                    label="Ønsket Pris"
                                     v-model="price"
                             solo
                             flat
@@ -83,7 +83,7 @@
 
                                 <v-card-text class="py-0">
                                     <div style="overflow-wrap: break-word">Trenger hjelp med: {{ req.request }}</div>
-                                    <div style="overflow-wrap: break-word">Pris: {{ req.price }}</div>
+                                    <div style="overflow-wrap: break-word">Ønsket Pris: {{ req.price }}</div>
                                     <div style="overflow-wrap: break-word">Sted: {{ req.place }}</div>
                                 </v-card-text>
 
