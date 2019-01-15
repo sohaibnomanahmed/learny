@@ -43,7 +43,7 @@
                                 <div><h4>{{ getUser(Luser.id).name }}</h4></div>
                                 <div>Studie: {{ getUser(Luser.id).study }}</div>
                                 <span>Underviser: </span>
-                                <span v-for="(index,i) in getUser(Luser.id).subList" :key="`${i}-${index}`">{{ index.sub }} </span>
+                                <span v-for="(index,i) in getUser(Luser.id).subList" :key="`${i}-${index}`">{{ index.sub }}<span v-if="(i+1) != getUser(Luser.id).subList.length">, </span></span>
                             </v-flex>
                         </v-layout>
                         </v-container>
@@ -101,7 +101,19 @@ export default {
                     searchedUsers.push(allUsers[index])
                 }
             }
-            return searchedUsers
+
+            return searchedUsers.sort((a, b) => 
+                { 
+                    if (!a.subList && !b.subList){
+                        return 0 - 0
+                    } else if (!a.subList){
+                        return b.subList.length - 0
+                    } else if (!b.subList){
+                        return 0 - a.subList.length
+                    } else {
+                        return b.subList.length - a.subList.length 
+                    } 
+                })
         },
         error(){
             return this.$store.getters.error
