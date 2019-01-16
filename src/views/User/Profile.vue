@@ -230,7 +230,7 @@
                                             <h3>{{ getUser(r.creator_id).name }}</h3>
                                         </v-card-title>
 
-                                        <v-card-text class="py-0">
+                                        <v-card-text class="pt-0">
                                             <div style="overflow-wrap: break-word">{{ r.review }}</div>
                                         </v-card-text>
                                     </v-flex>

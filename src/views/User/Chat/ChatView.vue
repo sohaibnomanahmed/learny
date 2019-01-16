@@ -43,9 +43,9 @@
                                             <h3 style="color:#455A64">Underviser ingen fag</h3>
                                         </v-flex>
                                     </v-layout>
-                            {{ seenMessage }}
                         </v-container>
                         <span></span>
+                        {{ seenMessageMut}}
                     </v-card>
 </template>
 
@@ -71,17 +71,11 @@ export default {
                 return messages
             }
         },
-        seenMessage(){
-            if (this.messages){
-                this.$store.dispatch('seenMessage', {
-                        mess: this.messages,
-                        id: this.$props.id,
-                        userid: this.user.id
-                })
-            }
-        },
         error(){
             return this.$store.getters.error
+        },
+        seenMessageMut(){
+            this.seenMessage()
         },
         loading(){
             return this.$store.getters.loading
@@ -90,6 +84,16 @@ export default {
     methods: {
         toChat(id){
             this.$router.push('/profile/' + id)
+        },
+        seenMessage(){
+            let messages = this.messages
+            if (messages){
+                this.$store.dispatch('seenMessage', {
+                        mess: messages,
+                        id: this.$props.id,
+                        userid: this.user.id
+                })
+            }
         }
     },
     updated(){

@@ -77,10 +77,15 @@ export default {
             if (this.mess === ''){
                 return
             }
+
+            let timed = new Date()
+            timed.setHours(timed.getHours())
+            timed.setMinutes(timed.getMinutes())
             this.$store.dispatch('sendMessage', {
                 id: this.user.id,
                 to_id: this.$props.id,
-                message: this.mess
+                message: this.mess,
+                time: timed
             })
             this.mess = ''
         },

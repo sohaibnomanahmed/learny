@@ -61,7 +61,8 @@ export default {
             const message = {
                 id: myID,
                 message: payload.message,
-                seen: false
+                seen: false,
+                time: payload.time.toISOString()
             }
 
             if (myID === toID){
@@ -86,10 +87,12 @@ export default {
             for (let key in seenMessages){
                 seenMessages[key] = {
                     id: seenMessages[key].id,
+                    time: seenMessages[key].time,
                     message: seenMessages[key].message,
                     seen: true
                 }
             }
+            
             firebase.database().ref('/messages/').child(myID).child(toID).set(seenMessages)
                 .then(data => { })
                 .catch(error => {console.log(error)})

@@ -6,8 +6,10 @@ import store from './store/store'
 import firebase from 'firebase'
 import AlertCmp from './components/Alert.vue'
 import ChatView from './views/User/Chat/ChatView'
+import DateFilter from './plugins/date'
 
 Vue.config.productionTip = false
+Vue.filter('date', DateFilter)
 Vue.component('app-alert', AlertCmp)
 Vue.component('chat-view', ChatView)
 

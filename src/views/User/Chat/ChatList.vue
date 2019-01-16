@@ -105,7 +105,14 @@ export default {
                     chatlist.push(key)
                 }
             }
-            return chatlist
+
+            let p = chatlist.sort((a, b) => {
+                let t =  new Date(messages[b][Object.keys(messages[b]).reverse()[0]].time) - new Date(messages[a][Object.keys(messages[a]).reverse()[0]].time)
+                return t
+            
+            })
+
+            return p
         },
         checkMessNotf(){
             return (id) => {
@@ -113,7 +120,7 @@ export default {
                 let listMessage = messages[id]
                 return {
                     seen: listMessage[Object.keys(listMessage).reverse()[0]].seen,
-                    mess: listMessage[Object.keys(listMessage).reverse()[0]].message
+                    mess: listMessage[Object.keys(listMessage).reverse()[0]].message,
                 }
             }
         },
