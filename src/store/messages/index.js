@@ -92,7 +92,6 @@ export default {
                     seen: true
                 }
             }
-            
             firebase.database().ref('/messages/').child(myID).child(toID).set(seenMessages)
                 .then(data => { })
                 .catch(error => {console.log(error)})
