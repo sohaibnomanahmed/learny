@@ -1,11 +1,11 @@
 {
   "rules": { 
     "requests": {
-      ".read": "auth != null",
+      ".read": true,
 	    ".write": "auth != null"   
     },
     "users": {
-      ".read": "auth != null",
+      ".read": true,
       "$uid": {
 	    	".write": "$uid === auth.uid"
       }
@@ -17,10 +17,11 @@
       }
     },
     "reviews": {
-      ".read": "auth != null",
+      ".read": true,
       "$uid": {
         ".write": "$uid !== auth.uid"
       }
     }
   }
 }
+
