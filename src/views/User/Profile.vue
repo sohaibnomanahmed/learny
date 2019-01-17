@@ -235,7 +235,7 @@
                                         </v-card-text>
                                     </v-flex>
 
-                                    <v-flex xs1 sm1 align-center>
+                                    <v-flex xs1 sm1 align-center v-if="user">
                                             <v-btn v-if="r.creator_id == user.id" fab small outline 
                                                 @click="delRev(i)"
                                                 class="mt-4 red red--text">
@@ -254,7 +254,7 @@
                                  height="200"
                                  ></v-img>
                                 <h3 style="color:#455A64">Ingen omtaler</h3>
-                                <v-card v-if="usersProfile" flat class="amber accent-1 mt-2">
+                                <v-card v-if="user && usersProfile" flat class="amber accent-1 mt-2">
                                     <v-card-text>
                                         En god start med å få omtaler er å gå til bestillinger og hjelpe folk, slik at man kan styrke profilen sin, og dermed øke sjansene for å bli valgt som mentor.
                                     </v-card-text>
@@ -264,7 +264,7 @@
                             </v-container>
                         </v-layout>
                             <v-divider></v-divider>
-                            <v-layout row v-if="!usersProfile">
+                            <v-layout row v-if="user && !usersProfile">
                                 <v-flex xs12>
                                     <v-textarea
                                         label="Skrive en omtale"
@@ -285,10 +285,19 @@
                         block
                         flat
                                                                        outline
-                                                                            v-if="!usersProfile"
+                                                                            v-if="user && !usersProfile"
                                                                             @click="toMess"
                         class="primary primary--text mt-2">
                         Send melding</v-btn>
+                    <v-btn
+                        block
+                        flat
+                                                                       outline
+                                                                            v-else
+                                                                  
+                        :disabled="!user"
+                        class="primary primary--text mt-2">
+                        Du må være inlogget for å sende melding</v-btn>
                 </v-flex>
             </v-layout>
             
@@ -347,7 +356,9 @@ export default {
     },
     methods: {
         toMess(){
-            this.$router.push('/chat/' + this.$props.id)
+            if (user){
+                this.$router.push('/chat/' + this.$props.id)
+            }
         },
         addSub(){
             if(this.sub === '' || this.price === ''){

@@ -46,12 +46,12 @@
                            @click="onSignin"
                            :disabled="loading" 
                            :loading="loading">
-                        Log inn med facebook
+                            Autentiser med facebook
                            <span slot="loader" class="custom-loader">
                                <v-icon light>cached</v-icon>
                            </span>
                     </v-btn>
-                        <p class="mt-2" style="color: #455A64; font-size: 80%">Vi bruker facebook log inn, fra hvor vi henter navnet til brukeren for å forhindre falske brukere og emailen for å autentisering, slik at vi bare har autentiserte brukere på vår side. ved å trykke på log inn aksepterer du vår personvern som er linket på toppen</p>
+                        <p class="mt-2" style="color: #455A64; font-size: 80%">Vi bruker facebook autentisering, fra hvor vi henter navnet og emailen til brukeren for å forhindre falske brukere, ved å autentisere via facebook aksepterer du vår personvern som er linket på toppen</p>
                 </v-flex>
             </v-flex>
         </v-layout>
