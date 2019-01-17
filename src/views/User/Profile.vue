@@ -254,6 +254,11 @@
                                  height="200"
                                  ></v-img>
                                 <h3 style="color:#455A64">Ingen omtaler</h3>
+                                <v-card v-if="usersProfile" flat class="amber accent-1 mt-2">
+                                    <v-card-text>
+                                        En god start med å få omtaler er å gå til bestillinger og hjelpe folk, slik at man kan styrke profilen sin, og dermed øke sjansene for å bli valgt som mentor.
+                                    </v-card-text>
+                                </v-card>
                             </v-flex>
                                 </v-layout>
                             </v-container>

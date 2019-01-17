@@ -20,27 +20,28 @@
                         </v-layout>
 
                         <v-layout>
-                            <v-flex xs6>
-                                <v-text-field
-                                    label="Ønsket Pris"
-                                    v-model="price"
-                            solo
-                            flat
-                            style="border-right: 1px solid #ccc;
-                                    border-bottom: 1px solid #ccc;
-                                    border-left: 1px solid #ccc"
-                                    hide-details
-                                    required>
-                                </v-text-field>
-                            </v-flex>
-                            <v-spacer></v-spacer>
-                            <v-flex xs6>
+                            <!-- <v-flex xs6> -->
+                            <!--     <v-text-field -->
+                            <!--         label="Ønsket Pris" -->
+                            <!--         v-model="price" -->
+                            <!-- solo -->
+                            <!-- flat -->
+                            <!-- style="border-right: 1px solid #ccc; -->
+                            <!--         border-bottom: 1px solid #ccc; -->
+                            <!--         border-left: 1px solid #ccc" -->
+                            <!--         hide-details -->
+                            <!--         required> -->
+                            <!--     </v-text-field> -->
+                            <!-- </v-flex> -->
+                            <!-- <v-spacer></v-spacer> -->
+                            <v-flex xs12>
                                 <v-text-field
                                     label="Sted/Tid"
                                     v-model="place"
                             solo
                             flat
                             style="border-right: 1px solid #ccc;
+                                    border-left: 1px solid #ccc;
                                     border-bottom: 1px solid #ccc"
                                     hide-details
                                     required>
@@ -83,7 +84,7 @@
 
                                 <v-card-text class="py-0">
                                     <div style="overflow-wrap: break-word">Trenger hjelp med: {{ req.request }}</div>
-                                    <div style="overflow-wrap: break-word">Ønsket Pris: {{ req.price }}</div>
+                                    <!-- <div style="overflow-wrap: break-word">Ønsket Pris: {{ req.price }}</div> -->
                                     <div style="overflow-wrap: break-word">Sted: {{ req.place }}</div>
                                 </v-card-text>
 
@@ -125,7 +126,7 @@
    data() {
     return {
         request: '',
-        price: '',
+        price: 0,
         place: ''
     }  
    },
