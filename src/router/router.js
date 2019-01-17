@@ -19,7 +19,6 @@ export default new Router({
       path: '/policy',
       name: 'policy',
       component: () => import('../views/Policy'),
-      beforeEnter: OutGuard
     },
     {
       path: '/chat/:id',
@@ -39,19 +38,16 @@ export default new Router({
       name: 'profile',
       props: true,
       component: () => import('../views/User/Profile'),
-      beforeEnter: AuthGuard
     },
     {
       path: '/mentors',
       name: 'mentors',
       component: () => import('../views/User/Mentors'),
-      beforeEnter: AuthGuard
     },
     {
       path: '/requests',
       name: 'requests',
       component: () => import('../views/User/Requests'),
-      beforeEnter: AuthGuard
     }
   ]
 })

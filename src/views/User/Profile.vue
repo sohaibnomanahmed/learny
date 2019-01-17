@@ -29,8 +29,8 @@
                                     <img :src="getUser(this.$props.id).imageURL">
                                 </v-avatar>
                             </div>
-                            <v-btn v-if="usersProfile" outline flat @click="onPickFile" class="mb-3">Endre Bildet</v-btn>
-                            <v-btn v-if="usersProfile && imageURL !== null" flat @click="onSaveImage" class="success mb-3">Lagre</v-btn>
+                            <v-btn v-if="user && usersProfile" outline flat @click="onPickFile" class="mb-3">Endre Bildet</v-btn>
+                            <v-btn v-if="user && usersProfile && imageURL !== null" flat @click="onSaveImage" class="success mb-3">Lagre</v-btn>
                             <input type="file" style="display: None" ref="fileInput" accept="image/*" @change="onFilePicked"></input>
                         </v-flex>
                     </v-layout>
@@ -50,11 +50,11 @@
                                         <v-flex xs10 sm11>
                                             <v-text-field
                                                                v-model="name"
-                                                               v-if="usersProfile && edit"
+                                                               v-if="user && usersProfile && edit"
                                                                solo
                                                                flat
                                                                hide-details
-                                                               readonly
+                                                               :disabled="true"
                                                                style="border: 1px dotted #ccc"
                                                                >
                                             </v-text-field>
@@ -69,7 +69,7 @@
                                             <v-text-field
                                                                label="Studie"
                                                                v-model="study"
-                                                               v-if="usersProfile && edit"
+                                                               v-if="user && usersProfile && edit"
                                                                solo
                                                                flat
                                                                hide-details
@@ -88,7 +88,7 @@
                                             <v-textarea
                                                                placeholder="Add bio"
                                                                v-model="bio"
-                                                               v-if="usersProfile && edit" 
+                                                               v-if="user && usersProfile && edit" 
                                                                solo
                                                                flat
                                                                hide-details
@@ -98,7 +98,7 @@
                                                 <h4 style="color: #455A64" v-else>{{ getUser(this.$props.id).bio }}</h4>
                                         </v-flex>
                                     </v-layout>
-                                    <v-layout row v-if="usersProfile" class="mt-2">
+                                    <v-layout row v-if="user && usersProfile" class="mt-2">
                                         <v-flex xs12 v-if="!edit">
                                             <v-btn class="" 
                                                 @click="makeEdit" flat block>Endre</v-btn>
@@ -122,13 +122,13 @@
 
                     <v-layout row wrap>
                         <v-flex xs12>
-                            <v-card flat style="border: 1px solid #ccc" v-if="subList || usersProfile">
+                            <v-card flat style="border: 1px solid #ccc" v-if="subList || (user && usersProfile)">
                                     <v-layout>
                                         <v-container>
                                             <v-layout row align-center>
                                         <v-flex xs4 sm5 ><h4>Underviser Emnene</h4></v-flex>
                                         <v-flex xs4 sm5 class="align-end"><h4>Pris</h4></v-flex>
-                                        <v-flex xs2 sm1 class="align-end" v-if="usersProfile">
+                                        <v-flex xs2 sm1 class="align-end" v-if="user && usersProfile">
                                             <v-btn fab small :disabled="true" class="ma-0" dark flat color="white">
                                                 <v-icon dark></v-icon>
                                             </v-btn>
@@ -142,7 +142,7 @@
                                             <v-layout row wrap align-center>
                                         <v-flex xs4 sm5 style="overflow-wrap: break-word;" class="mr-2">{{ item.sub }}</v-flex>
                                         <v-flex xs4 sm5 style="overflow-wrap: break-word;" class="align-end">{{ item.price }}</v-flex>
-                                        <v-flex  xs2 sm1 class="align-end" v-if="usersProfile">
+                                        <v-flex  xs2 sm1 class="align-end" v-if="user && usersProfile">
                                             <v-btn fab small dark flat color="red" class="ma-0" @click="removeSub(i)">
                                                 <v-icon dark>clear</v-icon>
                                             </v-btn>
@@ -152,7 +152,7 @@
                                     </v-layout>
                                 <v-divider></v-divider>
                                         <form @submit.prevent="addSub">
-                                <v-card-actions v-if="usersProfile">
+                                <v-card-actions v-if="user && usersProfile">
                                     <v-layout row align-center>
                                         <v-flex xs5 class="mr-2">
                                             <v-text-field
@@ -321,7 +321,9 @@ export default {
             return this.$store.getters.getUser
         },
         usersProfile(){
-            return this.$store.getters.user.id === this.id
+            if (this.user){
+                return this.$store.getters.user.id === this.id
+            }
         },
         rev(){
             if (this.$store.getters.rev){

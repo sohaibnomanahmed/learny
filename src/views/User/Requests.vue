@@ -10,6 +10,7 @@
                         <v-textarea
                             label="Hva trenger du hjelp med?"
                             v-model="request"
+                                    :disabled="!user"
                             solo
                             flat
                             style="border: 1px solid #ccc"
@@ -37,6 +38,7 @@
                             <v-flex xs12>
                                 <v-text-field
                                     label="Sted/Tid"
+                                    :disabled="!user"
                                     v-model="place"
                             solo
                             flat
@@ -53,6 +55,7 @@
                             <v-flex xs12>
                                 <v-btn flat style="width: 100%; margin: 10px 0px" 
                                     type="submit"
+                                    :disabled="!user"
                                     class="success">
                                     Legg til Bestilling
                                 </v-btn>
@@ -88,7 +91,7 @@
                                     <div style="overflow-wrap: break-word">Sted: {{ req.place }}</div>
                                 </v-card-text>
 
-                                <v-card-actions> <!-- v-if="getUser(req.creator_id).id !== user.id">-->
+                                <v-card-actions v-if="user"> <!-- v-if="getUser(req.creator_id).id !== user.id">-->
                                     <v-btn flat
                                         :to="'/chat/' + getUser(req.creator_id).id"
                                                       block
@@ -108,6 +111,16 @@
                                         >
                                         <!-- <v-icon left light>arrow_forward</v-icon> -->
                                         Slett
+                                    </v-btn>
+                                </v-card-actions>
+                                <v-card-actions v-else> <!-- v-if="getUser(req.creator_id).id !== user.id">-->
+                                    <v-btn flat
+                                                      block
+                                                      :disabled="true"
+                                                      outline
+                                                      class="primary primary--text"
+                                        >
+                                        Du må være innloget for å sende melding
                                     </v-btn>
                                 </v-card-actions>
                              </v-flex>

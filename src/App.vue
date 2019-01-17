@@ -64,11 +64,13 @@ export default {
     computed: {
         menuItems () {
             let menuItems = [
+                    { icon: 'date_range', title: 'Bestillinger', link: '/requests' },
+                    { icon: 'school', title: 'Finn Mentor', link: '/mentors' },
                     { icon: 'assignment', title: 'Personvern og kontakt info', link: '/policy' },
             ]
             if (this.userIsAuth) {
                 menuItems = [
-                    { icon: 'assignment', title: 'Bestillinger', link: '/requests' },
+                    { icon: 'date_range', title: 'Bestillinger', link: '/requests' },
                     { icon: 'school', title: 'Finn Mentor', link: '/mentors' },
                     { icon: 'person', title: 'Profil', link: '/profile/' + this.$store.getters.user.id },
                     { icon: 'question_answer', title: 'Chat', link: '/chatlist' },

@@ -90,7 +90,7 @@ export default {
                     }
                 )
         },
-        fetchUserData({ commit }, payload){
+        fetchUserAuth({ commit }, payload){
             commit('setLoading', true)
 
             // get user data and log user inn
@@ -103,6 +103,9 @@ export default {
                     console.log(error)
                     commit('setLoading', false)
                 })
+        },
+        fetchUserData({ commit }, payload){
+            commit('setLoading', true)
 
             // load in users
             firebase.database().ref('/users/').on('value',
