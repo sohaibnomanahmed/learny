@@ -296,8 +296,7 @@
                                                                             v-if="!user"
                                                                   
                         :disabled="!user"
-                        class="primary primary--text mt-2">
-                        Du må være inlogget for å sende melding</v-btn>
+                        class="primary primary--text mt-2">Krever Autentisering</v-btn>
                 </v-flex>
             </v-layout>
             

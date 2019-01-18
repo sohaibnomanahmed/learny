@@ -6,7 +6,7 @@
                 <router-link to="/" tag="span" style="cursor: pointer">
                     <v-icon left large class="mr-2">donut_small</v-icon>
                     <span>SC</span>
-                    <span class="font-weight-light">OPE</span>
+                    <span class="font-weight-light">RUBBLE</span>
                 </router-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>

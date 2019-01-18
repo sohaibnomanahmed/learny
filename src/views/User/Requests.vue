@@ -21,21 +21,21 @@
                         </v-layout>
 
                         <v-layout>
-                            <!-- <v-flex xs6> -->
-                            <!--     <v-text-field -->
-                            <!--         label="Ønsket Pris" -->
-                            <!--         v-model="price" -->
-                            <!-- solo -->
-                            <!-- flat -->
-                            <!-- style="border-right: 1px solid #ccc; -->
-                            <!--         border-bottom: 1px solid #ccc; -->
-                            <!--         border-left: 1px solid #ccc" -->
-                            <!--         hide-details -->
-                            <!--         required> -->
-                            <!--     </v-text-field> -->
-                            <!-- </v-flex> -->
-                            <!-- <v-spacer></v-spacer> -->
-                            <v-flex xs12>
+                            <v-flex xs6>
+                                <v-text-field
+                                    label="Tilbyr"
+                                    v-model="price"
+                            solo
+                            flat
+                            style="border-right: 1px solid #ccc;
+                                    border-bottom: 1px solid #ccc;
+                                    border-left: 1px solid #ccc"
+                                    hide-details
+                                    required>
+                                </v-text-field>
+                            </v-flex>
+                            <v-spacer></v-spacer>
+                            <v-flex xs6>
                                 <v-text-field
                                     label="Sted/Tid"
                                     :disabled="!user"
@@ -43,7 +43,6 @@
                             solo
                             flat
                             style="border-right: 1px solid #ccc;
-                                    border-left: 1px solid #ccc;
                                     border-bottom: 1px solid #ccc"
                                     hide-details
                                     required>
@@ -87,8 +86,8 @@
 
                                 <v-card-text class="py-0">
                                     <div style="overflow-wrap: break-word">Trenger hjelp med: {{ req.request }}</div>
-                                    <!-- <div style="overflow-wrap: break-word">Ønsket Pris: {{ req.price }}</div> -->
-                                    <div style="overflow-wrap: break-word">Sted: {{ req.place }}</div>
+                                    <div style="overflow-wrap: break-word">Tilbyr: {{ req.price }}</div>
+                                    <div style="overflow-wrap: break-word">Sted/Tid: {{ req.place }}</div>
                                 </v-card-text>
 
                                 <v-card-actions v-if="user"> <!-- v-if="getUser(req.creator_id).id !== user.id">-->
@@ -120,7 +119,7 @@
                                                       outline
                                                       class="primary primary--text"
                                         >
-                                        Log inn for å sende melding
+                                        Krever Autentisering
                                     </v-btn>
                                 </v-card-actions>
                              </v-flex>
@@ -139,7 +138,7 @@
    data() {
     return {
         request: '',
-        price: 0,
+        price: '',
         place: ''
     }  
    },
