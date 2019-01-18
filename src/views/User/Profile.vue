@@ -356,7 +356,7 @@ export default {
     },
     methods: {
         toMess(){
-            if (user){
+            if (this.user){
                 this.$router.push('/chat/' + this.$props.id)
             }
         },
@@ -444,7 +444,9 @@ export default {
             this.edit = !this.edit
         },
        toMem(id){
-           this.$router.push('/profile/' + id)
+           if (this.user){
+            this.$router.push('/profile/' + id)
+           }
        }
     },
     updated(){

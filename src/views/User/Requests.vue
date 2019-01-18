@@ -120,7 +120,7 @@
                                                       outline
                                                       class="primary primary--text"
                                         >
-                                        Du må være innloget for å sende melding
+                                        Log inn for å sende melding
                                     </v-btn>
                                 </v-card-actions>
                              </v-flex>
