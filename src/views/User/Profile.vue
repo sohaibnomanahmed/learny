@@ -293,7 +293,7 @@
                         block
                         flat
                                                                        outline
-                                                                            v-else
+                                                                            v-if="!user"
                                                                   
                         :disabled="!user"
                         class="primary primary--text mt-2">
