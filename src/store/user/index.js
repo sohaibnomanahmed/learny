@@ -208,6 +208,8 @@ export default {
                                 }
                             }
                         })
+                    firebase.database().ref('/messages/').child(userId).remove()
+                    firebase.database().ref('/reviews/').child(userId).remove()
                     commit('setUser', null)
                     commit('setMessages', {})
                     commit('setReq', [])

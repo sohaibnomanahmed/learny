@@ -45,16 +45,6 @@ export default {
                     commit('setLoading', false)
                 })
         },
-        getMessages({commit}, payload){
-            commit('setLoading', true)
-            firebase.database().ref('/messages/').child(payload.id).on('value')
-                .then(data => {
-                    console.log(data)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        },
         sendMessage({commit}, payload){
             let myID = payload.id
             let toID = payload.to_id

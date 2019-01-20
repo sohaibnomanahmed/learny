@@ -16,13 +16,16 @@
         <v-container v-else>
             <v-layout row>
                 <v-flex xs12 sm8 offset-sm2 class="text-xs-center">
-            <chat-view :id="toId" style="height:400px; overflow-y:scroll;" class="chat-view"></chat-view> 
+            <chat-view :id="toId" style="height:450px; overflow-y:scroll;" class="chat-view"></chat-view> 
                         <v-textarea
-                            label="Send en melding?"
+                            label="Skriv en melding"
                             v-model="mess"
                             solo
                             flat
                             hide-details
+                            @keyup.enter.native="sendMessage"
+                            append-icon="send"
+                            @click:append="sendMessage"
                             style="
                                 border-left: 1px solid #ccc;
                                 border-right: 1px solid #ccc;
@@ -31,13 +34,13 @@
                             required>
                         </v-textarea>
                     </v-card>
-                        <v-btn
-                            flat 
-                            @click="sendMessage"
-                            class="primary mt-2"
-                            style="width:100%; margin:0;">
-                            Send Melding
-                        </v-btn>
+                        <!-- <v-btn -->
+                        <!--     flat --> 
+                        <!--     @click="sendMessage" -->
+                        <!--     class="primary mt-2" -->
+                        <!--     style="width:100%; margin:0;"> -->
+                        <!--     Send Melding -->
+                        <!-- </v-btn> -->
                 </v-flex>
                 {{ messages }}
                 </v-flex>
