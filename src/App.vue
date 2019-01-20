@@ -1,12 +1,16 @@
 <template>
     <v-app>
         <v-toolbar flat app dark class="primary" >
-            <v-toolbar-side-icon @click="sideNav = !sideNav" class="hidden-sm-and-up" v-if="userIsAuth"></v-toolbar-side-icon>
+            <v-toolbar-side-icon @click="sideNav = !sideNav" class="hidden-sm-and-up"></v-toolbar-side-icon>
             <v-toolbar-title class="headline text-uppercase">
                 <router-link to="/" tag="span" style="cursor: pointer">
-                    <v-icon left large class="mr-2">donut_small</v-icon>
-                    <span>SC</span>
-                    <span class="font-weight-light">RUBBLE</span>
+                    <!-- <v-icon left large class="mr-2">donut_small</v-icon> -->
+                    <v-icon left large class="mr-2">color_lens</v-icon>
+                    <!-- <v-icon left large class="mr-2">spa</v-icon> -->
+                    <!-- <v-icon left large class="mr-2">ac_unit</v-icon> -->
+                    <!-- <v-icon left large class="mr-2">share</v-icon> -->
+                    <span>LE</span>
+                    <span class="font-weight-light">ARNY</span>
                 </router-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
@@ -26,7 +30,7 @@
             </v-toolbar-items>
         </v-toolbar>
 
-        <v-navigation-drawer temporary v-model="sideNav" fixed v-if="userIsAuth">
+        <v-navigation-drawer temporary v-model="sideNav" fixed>
             <v-list>
                 <v-list-tile v-for="item in menuItems" :key="item.title" :to="item.link">
                     <v-list-tile-action>

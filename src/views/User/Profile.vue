@@ -297,6 +297,14 @@
                                                                   
                         :disabled="!user"
                         class="primary primary--text mt-2">Krever Autentisering</v-btn>
+                    <v-btn
+                        block
+                        flat
+                                                                       outline
+                                                                            v-if="user && usersProfile"
+                                                                  
+                        
+                        class="red red--text mt-2" @click="delUser">Slett bruker</v-btn>
                 </v-flex>
             </v-layout>
             
@@ -393,6 +401,10 @@ export default {
                 id: id,
                 user_id: this.$props.id
             })
+        },
+        delUser(){
+            this.$store.dispatch('delUser')
+            this.$router.push('/')
         },
         removeSub(i){
             this.$store.dispatch('removeSub',i)

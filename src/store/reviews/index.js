@@ -3,6 +3,7 @@ import * as firebase from 'firebase'
 export default {
     state: {
         rev: {},
+        rev_notf: 0
     },
     mutations: {
         setRev (state, payload){

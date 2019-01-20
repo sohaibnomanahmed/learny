@@ -194,6 +194,32 @@ export default {
                     commit('setLoading', false)
                 })
         },
+        delUser({ commit, getters }){
+            let userId = getters.user.id
+
+            firebase.database().ref('/users/').child(userId).remove()
+                .then(date => {
+                    firebase.database().ref('/requests/').once('value')
+                        .then(data => {
+                            const req = data.val()
+                            for (let key in req) {
+                                if (req[key].creator_id == userId){
+                                    firebase.database().ref('/requests/').child(key).remove()
+                                }
+                            }
+                        })
+                    commit('setUser', null)
+                    commit('setMessages', {})
+                    commit('setReq', [])
+                    commit('setUsers', [])
+                    firebase.auth().signOut()
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        
+        
+        },
         logout({ commit }) {
             commit('setUser', null)
             commit('setMessages', {})
