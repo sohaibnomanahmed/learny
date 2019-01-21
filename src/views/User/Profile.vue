@@ -455,9 +455,7 @@ export default {
             this.edit = !this.edit
         },
        toMem(id){
-           if (this.user){
             this.$router.push('/profile/' + id)
-           }
        }
     },
     updated(){
