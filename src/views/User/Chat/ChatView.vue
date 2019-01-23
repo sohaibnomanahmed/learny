@@ -14,9 +14,12 @@
                                             <!-- <v-avatar size="40px" @click="toChat(message.id)" style="cursor: pointer" v-if="!getUser(message.id).imageURL"> -->
                                             <!--     <img :src="require('../../../assets/profile.svg')"> -->
                                             <!-- </v-avatar> -->
-                                    <img style="
+                                    <img 
+                                    @click="toChat(message.id)"
+                                    style="
                                       object-fit: cover;
                                       border-radius:50%;
+                                      cursor: pointer;
                                       width: 40px;
                                       cursor: pointer;
                                       height: 40px;" 
