@@ -33,7 +33,7 @@
                              ></v-img>
                         </v-flex>
                         <v-flex xs12 sm6>
-                            <p style="color: #455A64; font-size: 110%"><strong>Ønsker du hjelp med å lære noe nytt?</strong> På learny kan du få hjelp med alt fra eksamener, obliger og ukes oppgaver til idrett, spill eller bare lære noe nytt. Legg inn en bestilling og få hjelp med det du trenger</p>
+                            <p style="color: #455A64; font-size: 110%"><strong>Ønsker du hjelp med å lære noe nytt?</strong> På learny kan du få hjelp med alt fra eksamener, obliger og ukes oppgaver til idrett, spill eller bare lære noe nytt. Legg inn en bestilling og få hjelp med det du trenger !</p>
                             <p style="color: #455A64; font-size: 110%"><strong>Ønsker du en fleksibel jobb?</strong> Hos learny kan du en bli en mentor og lære bort det du kan, fra fag til egne ferdigheter som ditt eget morsmål. Du kan også lære bort noe du kan, til gjengeld få lært noe du alltid har hatt lyst til å lære, ikke vent start nå !</p>
                         </v-flex>
                     </v-layout>
@@ -47,12 +47,12 @@
                            @click="onSignin"
                            :disabled="loading" 
                            :loading="loading">
-                            Autentiser med facebook
+                            Logg inn med facebook
                            <span slot="loader" class="custom-loader">
                                <v-icon light>cached</v-icon>
                            </span>
                     </v-btn>
-                        <p class="pa-3" style="color: #455A64; font-size: 80%">Vi bruker facebook autentisering, for å forhindre falske brukere, ved å autentisere via facebook aksepterer du vår personvern som er linket på toppen</p>
+                        <p class="pa-3" style="color: #455A64; font-size: 80%">Vi bruker facebook logg inn, for å forhindre falske brukere, ved å autentisere via facebook aksepterer du vår personvern som er linket på toppen</p>
                 </v-flex>
             </v-flex>
         </v-layout>

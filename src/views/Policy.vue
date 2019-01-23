@@ -8,7 +8,8 @@
 <p>Effective date: January 10, 2019</p>
 
 
-<p>Scope ("us", "we", or "our") operates the scope.re website (hereinafter referred to as the "Service").</p>
+<p>Learny ("us", "we", or "our") operates the learny.no website (hereinafter referred to as the "Service").</p>
+
 
 <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. The Privacy Policy  for Scope is based on the<a href="https://termsfeed.com/blog/sample-privacy-policy-template/">TermsFeed's Privacy Policy Template</a>.</p>
 
@@ -18,7 +19,7 @@
 <ul>
     <li>
         <p><strong>Service</strong></p>
-                <p>Service is the scope.re website operated by Scope</p>
+                <p>Service is the learny.no website operated by Learny</p>
             </li>
     <li>
         <p><strong>Personal Data</strong></p>
@@ -118,7 +119,6 @@
 <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
 <p>We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update the "effective date" at the top of this Privacy Policy.</p>
 <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-
 
 <h2>Contact Us</h2>
 <p>If you have any questions about this Privacy Policy, please contact us:</p>

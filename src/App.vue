@@ -70,7 +70,7 @@ export default {
             let menuItems = [
                     { icon: 'date_range', title: 'Bestillinger', link: '/requests' },
                     { icon: 'school', title: 'Finn Mentor', link: '/mentors' },
-                    { icon: 'assignment', title: 'Personvern og kontakt info', link: '/policy' },
+                    { icon: 'assignment', title: 'Personvernerklæring', link: '/policy' },
             ]
             if (this.userIsAuth) {
                 menuItems = [
