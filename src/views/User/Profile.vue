@@ -462,10 +462,11 @@ export default {
         this.subList = this.getUser(this.$props.id).subList
     },
     mounted() {
-            this.name = this.getUser(this.$props.id).name
-            this.study = this.getUser(this.$props.id).study
-            this.bio = this.getUser(this.$props.id).bio
-            this.subList = this.getUser(this.$props.id).subList
+        console.log(this.$props.id)
+        this.name = this.getUser(this.$props.id).name
+        this.study = this.getUser(this.$props.id).study
+        this.bio = this.getUser(this.$props.id).bio
+        this.subList = this.getUser(this.$props.id).subList
     }
 } 
 </script>

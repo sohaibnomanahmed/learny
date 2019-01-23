@@ -77,7 +77,7 @@ export default {
     },
     methods: {
         sendMessage(){
-            if (this.mess === ''){
+            if (this.mess.trim() == ''){
                 return
             }
 

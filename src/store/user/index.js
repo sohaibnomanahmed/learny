@@ -13,7 +13,7 @@ export default {
             state.users = payload
         },
         removeSub (state, payload){
-            state.user.subList.splice(payload, 1)
+            console.log(state.user.subList)
         },
         updateUser(state, payload){
             let user = state.user
@@ -184,9 +184,11 @@ export default {
         removeSub({commit, getters}, payload){
             commit('setLoading', true)
             let id = getters.user.id
-            firebase.database().ref('/users/').child(id).child('subList').child(payload).remove()
+            getters.user.subList.splice(payload, 1)
+            console.log(getters.user.subList)
+            firebase.database().ref('/users/').child(id).child('subList').set(getters.user.subList)
                 .then(data => {
-                    commit('removeSub', payload)
+                    // commit('removeSub', payload)
                     commit('setLoading', false)
                 })
                 .catch(error => { 
@@ -219,8 +221,6 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
-        
-        
         },
         logout({ commit }) {
             commit('setUser', null)
