@@ -44,6 +44,7 @@ export default {
             commit('clearError')
             var provider = new firebase.auth.FacebookAuthProvider()
             var name = ''
+            var imageURL = ''
 
             // firebase.auth().signInWithRedirect(provider)
 
@@ -51,7 +52,9 @@ export default {
                 .then(result => {
                     var token = result.credential.accessToken
                     var user = result.user
+                    console.log(user)
                     name = user.displayName
+                    imageURL = user.photoURL + "?height=500"
                     return user})
                 .then(user => {
                     return firebase.database().ref('/users/' + user.uid).once('value')})
@@ -65,8 +68,8 @@ export default {
                             name: name,
                             study: '',
                             bio: '',
-                            imageURL: "",
-                            subList: false,
+                            imageURL: imageURL,
+                            subList: [],
                             requests: [],
                             offers: []
                         }

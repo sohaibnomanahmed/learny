@@ -32,12 +32,18 @@
                         <v-container>
                             <v-layout row>
                                 <v-flex xs3 sm2 md1>
-                                <v-avatar size="40px" v-if="getUser(Luser.id).imageURL">
-                                    <img :src="getUser(Luser.id).imageURL">
-                                </v-avatar>
-                                <v-avatar size="40px" v-if="!getUser(Luser.id).imageURL">
-                                    <img :src="require('../../assets/profile.svg')">
-                                </v-avatar>
+                                <!-- <v-avatar size="40px" v-if="getUser(Luser.id).imageURL"> -->
+                                <!--     <img :src="getUser(Luser.id).imageURL"> -->
+                                <!-- </v-avatar> -->
+                                <!-- <v-avatar size="40px" v-if="!getUser(Luser.id).imageURL"> -->
+                                <!--     <img :src="require('../../assets/profile.svg')"> -->
+                                <!-- </v-avatar> -->
+                                    <img style="
+                                      object-fit: cover;
+                                      border-radius:50%;
+                                      width: 40px;
+                                      height: 40px;" 
+                                      :src="getUser(Luser.id).imageURL">
                                 </v-flex>
                             <v-flex xs9 sm10 md11 style="max-width: 100%; overflow: hidden" >
                                 <div><h4>{{ getUser(Luser.id).name }}</h4></div>

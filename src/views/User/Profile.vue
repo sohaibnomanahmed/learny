@@ -19,15 +19,30 @@
                     <v-layout row>
                         <v-flex xs12 class="text-xs-center">
                             <div slot="activator">
-                                <v-avatar size="150px" v-if="imageURL !== null" class="mb-3">
-                                    <img :src="imageURL">
-                                </v-avatar>
-                                <v-avatar size="150px" v-if="imageURL === null && !getUser(this.$props.id).imageURL" class="mb-3">
-                                    <img :src="require('../../assets/profile.svg')">
-                                </v-avatar>
-                                <v-avatar size="150px" v-if="imageURL === null && getUser(this.$props.id).imageURL" class="mb-3">
-                                    <img :src="getUser(this.$props.id).imageURL">
-                                </v-avatar>
+                                <!-- <v-avatar size="150px" v-if="imageURL !== null" class="mb-3"> -->
+                                <!--     <img :src="imageURL"> -->
+                                <!-- </v-avatar> -->
+                                <!-- <v-avatar size="150px" v-if="imageURL === null && !getUser(this.$props.id).imageURL" class="mb-3"> -->
+                                <!--     <img :src="require('../../assets/profile.svg')"> -->
+                                <!-- </v-avatar> -->
+                                    <img 
+                                    v-if="imageURL !== null"
+                                    style="
+                                      object-fit: cover;
+                                      border-radius:50%;
+                                      width: 150px;
+                                      margin-bottom: 3px;
+                                      height: 150px;" 
+                                      :src="imageURL">
+                                    <img 
+                                    v-else
+                                    style="
+                                      object-fit: cover;
+                                      border-radius:50%;
+                                      width: 150px;
+                                      margin-bottom: 3px;
+                                      height: 150px;" 
+                                      :src="getUser(this.$props.id).imageURL">
                             </div>
                             <v-btn v-if="user && usersProfile" outline flat @click="onPickFile" class="mb-3">Endre Bildet</v-btn>
                             <v-btn v-if="user && usersProfile && imageURL !== null" flat @click="onSaveImage" class="success mb-3">Lagre</v-btn>
