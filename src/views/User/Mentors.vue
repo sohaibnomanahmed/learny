@@ -28,8 +28,8 @@
                                 >
                             </v-text-field>
                                 <div v-if="users.length != 0">
-                    <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2">
-                        <v-container>
+                    <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2" v-if="getUser(Luser.id).subList">
+                        <v-container >
                             <v-layout row>
                                 <v-flex xs3 sm2 md1>
                                 <!-- <v-avatar size="40px" v-if="getUser(Luser.id).imageURL"> -->

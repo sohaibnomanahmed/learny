@@ -31,7 +31,7 @@
                                       object-fit: cover;
                                       border-radius:50%;
                                       width: 150px;
-                                      margin-bottom: 3px;
+                                      margin-bottom: 10px;
                                       height: 150px;" 
                                       :src="imageURL">
                                     <img 
@@ -40,12 +40,12 @@
                                       object-fit: cover;
                                       border-radius:50%;
                                       width: 150px;
-                                      margin-bottom: 3px;
+                                      margin-bottom: 10px;
                                       height: 150px;" 
                                       :src="getUser(this.$props.id).imageURL">
                             </div>
-                            <v-btn v-if="user && usersProfile" outline flat @click="onPickFile" class="mb-3">Endre Bildet</v-btn>
-                            <v-btn v-if="user && usersProfile && imageURL !== null" flat @click="onSaveImage" class="success mb-3">Lagre</v-btn>
+                            <v-btn v-if="user && usersProfile" outline flat @click="onPickFile" class="mb-3 mt-0">Endre Bildet</v-btn>
+                            <v-btn v-if="user && usersProfile && imageURL !== null" flat @click="onSaveImage" class="success mb-3 mt-0">Lagre</v-btn>
                             <input type="file" style="display: None" ref="fileInput" accept="image/*" @change="onFilePicked"></input>
                         </v-flex>
                     </v-layout>
@@ -230,14 +230,21 @@
                         <v-layout row wrap v-if="rev">
                                 <v-layout row wrap v-for="(r,i) in rev" :key="`${i}-${r}`">
                                      <v-flex xs3 sm2 class="text-xs-center" @click="toMem(r.creator_id)" style="cursor: pointer">
-                                        <v-avatar v-if="getUser(r.creator_id).imageURL" style="width: 100%; height: auto; margin: 20px;" size="50px">
-                                            <img 
-                                            :src="getUser(r.creator_id).imageURL"
-                                            >
-                                        </v-avatar>
-                                        <v-avatar v-if="!getUser(r.creator_id).imageURL" style="width: 100%; height: auto; margin: 20px;" size="50px">
-                                            <img :src="require('../../assets/profile.svg')">
-                                        </v-avatar>
+                                        <!-- <v-avatar v-if="getUser(r.creator_id).imageURL" style="width: 100%; height: auto; margin: 20px;" size="50px"> -->
+                                        <!--     <img --> 
+                                        <!--     :src="getUser(r.creator_id).imageURL" -->
+                                        <!--     > -->
+                                        <!-- </v-avatar> -->
+                                        <!-- <v-avatar v-if="!getUser(r.creator_id).imageURL" style="width: 100%; height: auto; margin: 20px;" size="50px"> -->
+                                        <!--     <img :src="require('../../assets/profile.svg')"> -->
+                                        <!-- </v-avatar> -->
+                                        <img style="
+                                          object-fit: cover;
+                                          border-radius:50%;
+                                          width: 50px;
+                                          margin: 20px;
+                                          height: 50px;" 
+                                          :src="getUser(r.creator_id).imageURL">
                                      </v-flex>
 
                                      <v-flex xs7 sm8>
