@@ -49,12 +49,19 @@
                             <v-flex xs12 v-else class="pa-3">
                                 <v-layout row>
                                 <v-flex xs3 sm2>
-                                <v-avatar size="50px" class="mr-2" v-if="getUser(id).imageURL">
-                                    <img :src="getUser(id).imageURL">
-                                </v-avatar>
-                                <v-avatar size="40px" class="mr-2" v-else>
-                                    <img :src="require('../../../assets/profile.svg')">
-                                </v-avatar>
+                                <!-- <v-avatar size="50px" class="mr-2" v-if="getUser(id).imageURL"> -->
+                                <!--     <img :src="getUser(id).imageURL"> -->
+                                <!-- </v-avatar> -->
+                                <!-- <v-avatar size="40px" class="mr-2" v-else> -->
+                                <!--     <img :src="require('../../../assets/profile.svg')"> -->
+                                <!-- </v-avatar> -->
+                                    <img style="
+                                      object-fit: cover;
+                                      border-radius:50%;
+                                      width: 50px;
+                                      height: 50px;
+                                      margin-right: 2px;" 
+                                      :src="getUser(id).imageURL">
                                 </v-flex>
                                 <v-flex xs9 sm10>
                                 <div>
@@ -75,7 +82,7 @@
                             <v-layout row>
                                 <v-flex xs12 class="text-xs-center">
                                     <v-img
-                                     :src="require('../../../assets/chat.jpg')"
+                                     :src="require('../../../assets/ch.jpg')"
                                      contain
                                      height="200"
                                      ></v-img>

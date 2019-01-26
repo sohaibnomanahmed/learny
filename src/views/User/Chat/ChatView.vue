@@ -58,16 +58,16 @@
                                     </v-layout>
                                 </v-flex>
                             </v-layout>
-                                    <v-layout row v-else>
-                                        <v-flex xs12 class="text-xs-center">
-                                            <v-img
-                                             :src="require('../../../assets/blackboard.jpg')"
-                                             contain
-                                             height="150"
-                                             ></v-img>
-                                            <h3 style="color:#455A64">Underviser ingen fag</h3>
-                                        </v-flex>
-                                    </v-layout>
+                            <v-layout row v-if="!messages" align-center>
+                                <v-flex xs12 class="text-xs-center">
+                                    <v-img
+                                     :src="require('../../../assets/chat.jpg')"
+                                     contain
+                                     height="150"
+                                     ></v-img>
+                                    <h3 style="color:#455A64">Start en samtale</h3>
+                                </v-flex>
+                            </v-layout>
                         </v-container>
                         <span></span>
                         {{ seenMessageMut}}
