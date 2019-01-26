@@ -52,7 +52,6 @@ export default {
                 .then(result => {
                     var token = result.credential.accessToken
                     var user = result.user
-                    console.log(user)
                     name = user.displayName
                     imageURL = user.photoURL + "?height=500"
                     return user})
@@ -188,7 +187,7 @@ export default {
             commit('setLoading', true)
             let id = getters.user.id
             getters.user.subList.splice(payload, 1)
-            console.log(getters.user.subList)
+            // console.log(getters.user.subList)
             firebase.database().ref('/users/').child(id).child('subList').set(getters.user.subList)
                 .then(data => {
                     // commit('removeSub', payload)
