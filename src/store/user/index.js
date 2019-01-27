@@ -212,6 +212,18 @@ export default {
                                 }
                             }
                         })
+                    firebase.database().ref('/reviews/').once('value')
+                        .then(data => {
+                            const rev_list = data.val()
+                            for (let rev_user in rev_list){
+                                console.log(rev_user)
+                                for (let key in rev_list[rev_user]) {
+                                    if (rev_list[rev_user][key].creator_id == userId){
+                                        firebase.database().ref('/reviews/').child(rev_user).child(key).remove()
+                                    }
+                                }
+                            }
+                        })
                     firebase.database().ref('/messages/').child(userId).remove()
                     firebase.database().ref('/reviews/').child(userId).remove()
                     commit('setUser', null)
