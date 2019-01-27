@@ -1,8 +1,35 @@
 <template>
-    <v-container>
+    <div>
+    <v-container v-if="loading">
+        <v-layout row>
+            <v-flex xs12 class="text-xs-center" >
+                <v-progress-circular
+                         indeterminate
+                         color="primary"
+                         :width="7"
+                         :size="70"
+                         v-if="loading"
+                         ></v-progress-circular>
+            </v-flex>
+        </v-layout>
+    </v-container>
+    <v-container v-else>
         <v-layout>
             <v-flex xs12 sm8 md6 offset-sm2 offset-md3>
                 <v-layout row wrap class="text-xs-right mb-3" align-center>
+                    <v-flex xs12>
+                            <v-text-field
+                                label="Søk etter bestillinger, tilbud, eller sted/tid"
+                                v-model="search"
+                                prepend-icon="search"
+                                solo
+                                hide-details
+                                flat
+                                style="border: 1px solid #ccc"
+                                class="mb-3 pl-2"
+                                >
+                            </v-text-field>
+                    </v-flex>
                     <v-flex xs12>
                         <form @submit.prevent="onSaveChanges">
                         <v-layout>
@@ -25,6 +52,7 @@
                                 <v-text-field
                                     label="Tilbyr"
                                     v-model="price"
+                                    :disabled="!user"
                             solo
                             flat
                             style="border-right: 1px solid #ccc;
@@ -130,6 +158,7 @@
             </v-flex>
         </v-layout>
     </v-container>
+    </div>
 </template>
 
 <script>
@@ -138,7 +167,8 @@
     return {
         request: '',
         price: '',
-        place: ''
+        place: '',
+        search: ''
     }  
    },
    computed: {
@@ -152,7 +182,20 @@
        return this.$store.getters.getUser
      },
      requests (){
-        return this.$store.getters.req
+        let allReq = this.$store.getters.req
+        let searchedReq = []
+        for (let index in allReq){
+            const regex = new RegExp(this.search, "gi")
+            if (
+                regex.test(allReq[index].request) ||
+                regex.test(allReq[index].price) ||
+                regex.test(allReq[index].place)
+            ){
+                searchedReq.push(allReq[index])
+            }
+        }
+
+         return searchedReq
      }
    },
    methods: {
