@@ -25,20 +25,24 @@
                                 <!-- <v-avatar size="50px" class="mr-2" v-if="getUser(id).imageURL"> -->
                                 <!--     <img :src="getUser(id).imageURL"> -->
                                 <!-- </v-avatar> -->
-                                <!-- <v-avatar size="40px" class="mr-2" v-else> -->
-                                <!--     <img :src="require('../../../assets/profile.svg')"> -->
-                                <!-- </v-avatar> -->
+                                <v-avatar size="40px" class="mr-2" v-if="!getUser(id)">
+                                    <img :src="require('../../../assets/profile.svg')">
+                                </v-avatar>
                                     <img style="
                                       object-fit: cover;
                                       border-radius:50%;
                                       width: 50px;
                                       height: 50px;
                                       margin-right: 2px;" 
-                                      :src="getUser(id).imageURL">
+                                      :src="getUser(id).imageURL"
+                                      v-if="getUser(id)">
                                 </v-flex>
                                 <v-flex xs9 sm10>
-                                <div>
+                                <div v-if="getUser(id)">
                                     <h4>{{ getUser(id).name }}</h4>
+                                </div>
+                                <div v-else>
+                                    <h4>Learny bruker</h4>
                                 </div>
                                 <div style="max-width: 100%; overflow: hidden">
                                 {{ checkMessNotf(id).mess }}

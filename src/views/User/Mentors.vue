@@ -20,6 +20,8 @@
                                 label="Søk etter navn, studie elle emner"
                                 v-model="search"
                                 prepend-icon="search"
+                                append-icon="school"
+                                @click:append="showMentor = !showMentor"
                                 solo
                                 hide-details
                                 flat
@@ -27,8 +29,8 @@
                                 class="mb-3 pl-2"
                                 >
                             </v-text-field>
-                                <div v-if="users.length != 0">
-                    <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2" v-if="getUser(Luser.id).subList">
+                                <div v-if="(users.length != 0) && (showMentor)">
+                                    <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2" v-if="getUser(Luser.id).subList">
                         <v-container >
                             <v-layout row>
                                 <v-flex xs3 sm2 md1>
@@ -55,7 +57,35 @@
                         </v-container>
                     </v-card>
                                 </div>
-                                <div v-else>
+                                <div v-if="(users.length != 0) && (!showMentor)">
+                                    <v-card flat :to="'/profile/' + getUser(Luser.id).id" style="border: 1px solid #ccc; cursor: pointer" v-for="(Luser, i) in users" :key="`${i}-${Luser.id}`" class="mb-2"> <!-- v-if="getUser(Luser.id).subList">-->
+                        <v-container >
+                            <v-layout row>
+                                <v-flex xs3 sm2 md1>
+                                <!-- <v-avatar size="40px" v-if="getUser(Luser.id).imageURL"> -->
+                                <!--     <img :src="getUser(Luser.id).imageURL"> -->
+                                <!-- </v-avatar> -->
+                                <!-- <v-avatar size="40px" v-if="!getUser(Luser.id).imageURL"> -->
+                                <!--     <img :src="require('../../assets/profile.svg')"> -->
+                                <!-- </v-avatar> -->
+                                    <img style="
+                                      object-fit: cover;
+                                      border-radius:50%;
+                                      width: 40px;
+                                      height: 40px;" 
+                                      :src="getUser(Luser.id).imageURL">
+                                </v-flex>
+                            <v-flex xs9 sm10 md11 style="max-width: 100%; overflow: hidden" >
+                                <div><h4>{{ getUser(Luser.id).name }}</h4></div>
+                                <div>Studie: {{ getUser(Luser.id).study }}</div>
+                                <span>Underviser: </span>
+                                <span v-for="(index,i) in getUser(Luser.id).subList" :key="`${i}-${index}`">{{ index.sub }}<span v-if="(i+1) != getUser(Luser.id).subList.length">, </span></span>
+                            </v-flex>
+                        </v-layout>
+                        </v-container>
+                    </v-card>
+                                </div>
+                                <div v-if="users.length == 0">
                         <v-container>
                             <v-layout row>
                                 <v-flex xs12 class="text-xs-center">
@@ -80,7 +110,8 @@ export default {
     props: ['id'],
     data () {
         return {
-            search: ''
+            search: '',
+            showMentor: true
         }
     },
     computed: {
