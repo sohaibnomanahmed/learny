@@ -128,13 +128,13 @@
         <!-- </ul> -->
 
                 <v-flex xs12 class="text-xs-left">
-                    <v-layout row wrap align-center>
+                    <v-layout row wrap align-center class="mt-4">
                         <v-flex xs12 sm6>
                             <v-img
                              :src="require('../assets/fb.png')"
                              class="my-3"
                              contain
-                             height="180"
+                             height="160"
                              ></v-img>
                         </v-flex>
                         <v-flex xs12 sm6>
@@ -142,13 +142,13 @@
                             <p style="color: #455A64; font-size: 100%">Vi bruker facebook autentisering for å forhindre false brukere på nettsiden og dermed laget et bedre produkt for våre brukere. Vi ønsker at alle mentorer skal kunne autentiserer og unngå spam på nettsiden, av den grunn kan ikke en bruker endre navnet som sitt som er henetet fra facebook. Vi poster aldri noe på facebook for deg, og bruker ikke dataen på noen andre måter enn å utentisere våre egne brukere.</p>
                         </v-flex>
                     </v-layout>
-                    <v-layout row wrap align-center>
+                    <v-layout row wrap align-center class="mt-4">
                         <v-flex xs12 sm6>
                             <v-img
                              :src="require('../assets/gdpr.png')"
                              class="my-3"
                              contain
-                             height="200"
+                             height="180"
                              ></v-img>
                         </v-flex>
                         <v-flex xs12 sm6>
@@ -156,13 +156,13 @@
                             <p style="color: #455A64; font-size: 100%">På learny ønsker vi at våre brukere skal ha full kontroll over sine egne data, og vi støtter dermed GDPR erklæringen. På learny er all dataen vi lagrer tilgengelig for brukeren på nettsiden, vi tracker ikke våre brukere og lagrer dermed ikke meta data, vi har bare oversikt over om en bruker er logget in får å gi han tilgang til f.eks char og sin egen profil noe brukeren ikke burde ha tilgang til uten å være logget inn, samt kan en bruker når som helst slettet all datane sin, ved å slette brukeren sin</p>
                         </v-flex>
                     </v-layout>
-                    <v-layout row wrap align-center>
+                    <v-layout row wrap align-center class="mt-4">
                         <v-flex xs12 sm6>
                             <v-img
                              :src="require('../assets/db.png')"
                              class="my-3"
                              contain
-                             height="200"
+                             height="180"
                              ></v-img>
                         </v-flex>
                         <v-flex xs12 sm6>

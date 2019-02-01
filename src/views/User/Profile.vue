@@ -318,7 +318,7 @@
                                                                             v-if="!user"
                                                                   
                         :disabled="!user"
-                        class="primary primary--text mt-2">Krever Autentisering</v-btn>
+                        class="primary primary--text mt-2">Krever Innlogging</v-btn>
                     <v-btn
                         block
                         flat

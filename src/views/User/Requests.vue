@@ -146,7 +146,7 @@
                                                       outline
                                                       class="primary primary--text"
                                         >
-                                        Krever Autentisering
+                                        Krever Innlogging
                                     </v-btn>
                                 </v-card-actions>
                              </v-flex>
