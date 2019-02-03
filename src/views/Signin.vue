@@ -93,6 +93,9 @@ export default {
         },
         onDismissed(){
             this.$store.dispatch('clearError')
+        },
+        track(){
+            this.$ga.page('/')
         }
     }
 } 

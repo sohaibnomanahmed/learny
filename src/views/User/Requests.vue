@@ -30,14 +30,14 @@
                                 >
                             </v-text-field>
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs12 v-if="user">
                         <form @submit.prevent="onSaveChanges">
                         <v-layout>
                             <v-flex xs12>
                         <v-textarea
                             label="Hva trenger du hjelp med?"
                             v-model="request"
-                                    :disabled="!user"
+                            :disabled="!user"
                             solo
                             flat
                             style="border: 1px solid #ccc"
@@ -91,6 +91,14 @@
 
                         </form>
                     </v-flex>
+                            <v-flex xs12 v-if="!user">
+                                <v-btn flat style="width: 100%; margin: 10px 0px" 
+                                    type="submit"
+                                    :disabled="!user"
+                                    class="success">
+                                    LOGG INN FOR Å OPPRETTE EN BESTILLING
+                                </v-btn>
+                            </v-flex>
                 </v-layout>
                 <v-layout row wrap class="text-xs-left" align-center>
                     <v-flex xs12>
@@ -221,7 +229,10 @@
        },
        toMem(id){
            this.$router.push('/profile/' + id)
-       }
+       },
+        track(){
+            this.$ga.page('/request')
+        }
    }
  }
 </script>

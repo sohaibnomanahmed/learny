@@ -92,6 +92,9 @@ export default {
             })
             this.mess = ''
         },
+        track(){
+            this.$ga.page('/chat')
+        }
     },
     updated() {
         var container = this.$el.querySelector(".chat-view");

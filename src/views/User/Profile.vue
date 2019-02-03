@@ -478,7 +478,10 @@ export default {
         },
        toMem(id){
             this.$router.push('/profile/' + id)
-       }
+       },
+        track(){
+            this.$ga.page('/profile')
+        }
     },
     updated(){
         this.subList = this.getUser(this.$props.id).subList

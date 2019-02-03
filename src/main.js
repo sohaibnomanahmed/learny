@@ -7,6 +7,11 @@ import firebase from 'firebase'
 import AlertCmp from './components/Alert.vue'
 import ChatView from './views/User/Chat/ChatView'
 import DateFilter from './plugins/date'
+import VueAnalytics from 'vue-analytics'
+
+Vue.use(VueAnalytics, {
+  id: 'UA-133694506'
+})
 
 Vue.config.productionTip = false
 Vue.filter('date', DateFilter)

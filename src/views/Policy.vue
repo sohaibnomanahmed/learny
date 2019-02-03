@@ -159,6 +159,20 @@
                     <v-layout row wrap align-center class="mt-4">
                         <v-flex xs12 sm6>
                             <v-img
+                             :src="require('../assets/track.png')"
+                             class="my-3"
+                             contain
+                             height="180"
+                             ></v-img>
+                        </v-flex>
+                        <v-flex xs12 sm6>
+                            <h3>Google Analytics</h3>
+                            <p style="color: #455A64; font-size: 100%">Vi bruker google analytics for å finne ut hvor mange brukere det er på siden til enhvertid. Vi får ikke noe informasjon om hvem brukeren er, men bruker redskapet bare til å kunne teste ut ulike markedsførings strategier og måle traffik på nettsiden for å teste ytelsen til nettsiden.</p>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout row wrap align-center class="mt-4">
+                        <v-flex xs12 sm6>
+                            <v-img
                              :src="require('../assets/db.png')"
                              class="my-3"
                              contain
@@ -175,6 +189,16 @@
         </v-layout>
     </v-container>
 </template>
+
+<script>
+    export default {
+        methods: {
+            track(){
+                this.$ga.page('/policy')
+            }
+        }
+    }
+</script>
 
 <style>
 p, h1, h2, h3, h4, li {

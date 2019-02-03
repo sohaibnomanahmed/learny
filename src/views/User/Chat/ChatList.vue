@@ -155,6 +155,9 @@ export default {
     methods: {
         toMess(id){
             this.$router.push('/chat/' + id)
+        },
+        track(){
+            this.$ga.page('/chatlist')
         }
     }
 } 

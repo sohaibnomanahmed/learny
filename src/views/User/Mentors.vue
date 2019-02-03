@@ -170,6 +170,9 @@ export default {
             }
             return false
         },
+        track(){
+            this.$ga.page('/mentors')
+        }
     },
     created() {
         for (let key in this.messages){
