@@ -1,5 +1,7 @@
 # scope
 
+Link: https://scope-37c8f.firebaseapp.com/ or https://learny.no
+
 ## Project setup
 ```
 npm install
