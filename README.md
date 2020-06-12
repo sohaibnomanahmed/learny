@@ -1,6 +1,6 @@
 # Learny
 
-Link: https://scope-37c8f.firebaseapp.com/ or https://learny.no
+Link: https://scope-37c8f.firebaseapp.com/
 
 
 ```
