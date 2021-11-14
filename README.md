@@ -2,6 +2,8 @@
 
 Link: https://scope-37c8f.firebaseapp.com/
 
+NB! Facebook credentials has expired and login + users profile pictures are not working anymore!!
+
 
 ```
 # Project setup
